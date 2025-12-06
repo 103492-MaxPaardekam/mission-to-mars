@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mission Control Interface</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+
+  <body>
+    <div class="scanlines"></div>
+
+    <header class="header">
+      <h1 class="logo">MISSION TO MARS</h1>
+
+      <button onclick="window.location.href='boot.html'" class="boot-button">
+        Reboot System
+      </button>
+    </header>
+
+    <main class="dashboard">
+      <!-- GROTE LINKERKOLOM MET ALLE MODULES -->
+      <section class="modules">
+        <a href="flight-info.html" class="module-card">
+          <h2>Vlucht Info</h2>
+          <p>Snelheid, locatie & route</p>
+        </a>
+
+        <a href="entertainment.html" class="module-card">
+          <h2>Entertainment</h2>
+          <p>Films, muziek, boeken</p>
+        </a>
+
+        <a href="vr-holodeck.html" class="module-card">
+          <h2>VR Holodeck</h2>
+          <p>Ervaar nieuwe werelden</p>
+        </a>
+
+        <a href="game.html" class="module-card">
+          <h2>Game</h2>
+          <p>Interactief avontuur</p>
+        </a>
+
+        <a href="menu.html" class="module-card">
+          <h2>Menu / Eten</h2>
+          <p>Dagmenu & snacks</p>
+        </a>
+
+        <a href="team.html" class="module-card">
+          <h2>Team</h2>
+          <p>Ontmoet AstroTech</p>
+        </a>
+      </section>
+
+      <!-- RECHTER KOLOM -->
+      <section class="side-panels">
+        <div class="side-panel">
+          <h2>System Diagnostics</h2>
+          <ul>
+            <li>Core Systems: Online</li>
+            <li>Process Load: 34%</li>
+            <li>Network Link: Stable</li>
+            <li>Subsystem Health: 98%</li>
+          </ul>
+        </div>
+        <div class="side-panel">
+          <h2>Data Monitor</h2>
+          <ul>
+            <li class="normal">Sensor Array: Active</li>
+            <li class="normal">Telemetry Stream: Synced</li>
+            <li class="normal">Power Grid: Normal</li>
+            <li class="normal">Heat Levels: Stable</li>
+          </ul>
+
+          <canvas id="telemetryGraph" width="300" height="90"></canvas>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/index.js"></script>
+  </body>
+</html>
