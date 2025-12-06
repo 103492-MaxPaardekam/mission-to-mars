@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Entertainment - Mission to Mars</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/entertainment.css" />
+  </head>
+  <body>
+    <div class="scanlines"></div>
+
+    <header class="header">
+      <h1 class="logo">MISSION TO MARS</h1>
+      <button onclick="window.location.href='index.html'" class="boot-button">
+        Terug naar Home
+      </button>
+    </header>
+
+    <main class="content-wrapper">
+      <h2 class="page-title">ENTERTAINMENT</h2>
+
+      <div class="category-tabs">
+        <button class="tab-btn active" onclick="showCategory('movies')">
+          Films
+        </button>
+        <button class="tab-btn" onclick="showCategory('music')">Muziek</button>
+        <button class="tab-btn" onclick="showCategory('books')">E-Books</button>
+      </div>
+
+      <!-- Movies Section -->
+      <div id="movies" class="content-section active">
+        <div class="grid">
+          <div class="card" onclick="showMovieInfo('interstellar')">
+            <div class="card-image">🎬</div>
+            <div class="card-title">Interstellar</div>
+            <div class="card-subtitle">Sci-Fi Epic</div>
+            <div class="card-meta">
+              <span>⭐ 8.6</span>
+              <span>2h 49m</span>
+            </div>
+          </div>
+          <div class="card" onclick="showMovieInfo('martian')">
+            <div class="card-image">🎬</div>
+            <div class="card-title">The Martian</div>
+            <div class="card-subtitle">Survival Drama</div>
+            <div class="card-meta">
+              <span>⭐ 8.0</span>
+              <span>2h 24m</span>
+            </div>
+          </div>
+          <div class="card" onclick="showMovieInfo('gravity')">
+            <div class="card-image">🎬</div>
+            <div class="card-title">Gravity</div>
+            <div class="card-subtitle">Space Thriller</div>
+            <div class="card-meta">
+              <span>⭐ 7.7</span>
+              <span>1h 31m</span>
+            </div>
+          </div>
+          <div class="card" onclick="showMovieInfo('2001')">
+            <div class="card-image">🎬</div>
+            <div class="card-title">2001: A Space Odyssey</div>
+            <div class="card-subtitle">Classic Sci-Fi</div>
+            <div class="card-meta">
+              <span>⭐ 8.3</span>
+              <span>2h 29m</span>
+            </div>
+          </div>
+          <div class="card" onclick="showMovieInfo('arrival')">
+            <div class="card-image">🎬</div>
+            <div class="card-title">Arrival</div>
+            <div class="card-subtitle">Sci-Fi Mystery</div>
+            <div class="card-meta">
+              <span>⭐ 7.9</span>
+              <span>1h 56m</span>
+            </div>
+          </div>
+          <div class="card" onclick="showMovieInfo('bladerunner')">
+            <div class="card-image">🎬</div>
+            <div class="card-title">Blade Runner 2049</div>
+            <div class="card-subtitle">Neo-Noir Sci-Fi</div>
+            <div class="card-meta">
+              <span>⭐ 8.0</span>
+              <span>2h 44m</span>
+            </div>
+          </div>
+          <div class="card" onclick="showMovieInfo('apollo13')">
+            <div class="card-image">🎬</div>
+            <div class="card-title">Apollo 13</div>
+            <div class="card-subtitle">Historical Drama</div>
+            <div class="card-meta">
+              <span>⭐ 7.7</span>
+              <span>2h 20m</span>
+            </div>
+          </div>
+          <div class="card" onclick="showMovieInfo('contact')">
+            <div class="card-image">🎬</div>
+            <div class="card-title">Contact</div>
+            <div class="card-subtitle">Sci-Fi Drama</div>
+            <div class="card-meta">
+              <span>⭐ 7.5</span>
+              <span>2h 30m</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Music Section -->
+      <div id="music" class="content-section">
+        <div class="grid">
+          <div class="card" onclick="showMusicInfo('ambient')">
+            <div class="card-image">🎵</div>
+            <div class="card-title">Space Ambient</div>
+            <div class="card-subtitle">Cosmic Soundscapes</div>
+            <div class="card-meta">
+              <span>45 tracks</span>
+              <span>3h 12m</span>
+            </div>
+          </div>
+          <div class="card" onclick="showMusicInfo('electronic')">
+            <div class="card-image">🎵</div>
+            <div class="card-title">Electronic Dreams</div>
+            <div class="card-subtitle">Synthwave Collection</div>
+            <div class="card-meta">
+              <span>32 tracks</span>
+              <span>2h 18m</span>
+            </div>
+          </div>
+          <div class="card" onclick="showMusicInfo('classical')">
+            <div class="card-image">🎵</div>
+            <div class="card-title">Classical in Space</div>
+            <div class="card-subtitle">Orchestral Masterpieces</div>
+            <div class="card-meta">
+              <span>28 tracks</span>
+              <span>2h 45m</span>
+            </div>
+          </div>
+          <div class="card" onclick="showMusicInfo('jazz')">
+            <div class="card-image">🎵</div>
+            <div class="card-title">Galactic Jazz</div>
+            <div class="card-subtitle">Smooth & Cosmic</div>
+            <div class="card-meta">
+              <span>38 tracks</span>
+              <span>2h 56m</span>
+            </div>
+          </div>
+          <div class="card" onclick="showMusicInfo('beats')">
+            <div class="card-image">🎵</div>
+            <div class="card-title">Interstellar Beats</div>
+            <div class="card-subtitle">Electronic & Dance</div>
+            <div class="card-meta">
+              <span>52 tracks</span>
+              <span>3h 34m</span>
+            </div>
+          </div>
+          <div class="card" onclick="showMusicInfo('meditation')">
+            <div class="card-image">🎵</div>
+            <div class="card-title">Meditation Mix</div>
+            <div class="card-subtitle">Relaxation & Calm</div>
+            <div class="card-meta">
+              <span>24 tracks</span>
+              <span>1h 48m</span>
+            </div>
+          </div>
+          <div class="card" onclick="showMusicInfo('lofi')">
+            <div class="card-image">🎵</div>
+            <div class="card-title">Lo-Fi Space Vibes</div>
+            <div class="card-subtitle">Chill & Study</div>
+            <div class="card-meta">
+              <span>41 tracks</span>
+              <span>2h 35m</span>
+            </div>
+          </div>
+          <div class="card" onclick="showMusicInfo('epic')">
+            <div class="card-image">🎵</div>
+            <div class="card-title">Epic Soundtracks</div>
+            <div class="card-subtitle">Cinematic Scores</div>
+            <div class="card-meta">
+              <span>36 tracks</span>
+              <span>3h 02m</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Books Section -->
+      <div id="books" class="content-section">
+        <div class="grid">
+          <div class="card" onclick="showBookInfo('expanse')">
+            <div class="card-image">📚</div>
+            <div class="card-title">The Expanse Series</div>
+            <div class="card-subtitle">James S.A. Corey</div>
+            <div class="card-meta">
+              <span>Sci-Fi</span>
+              <span>9 boeken</span>
+            </div>
+          </div>
+          <div class="card" onclick="showBookInfo('dune')">
+            <div class="card-image">📚</div>
+            <div class="card-title">Dune</div>
+            <div class="card-subtitle">Frank Herbert</div>
+            <div class="card-meta">
+              <span>Sci-Fi Epic</span>
+              <span>688 pages</span>
+            </div>
+          </div>
+          <div class="card" onclick="showBookInfo('foundation')">
+            <div class="card-image">📚</div>
+            <div class="card-title">Foundation</div>
+            <div class="card-subtitle">Isaac Asimov</div>
+            <div class="card-meta">
+              <span>Classic Sci-Fi</span>
+              <span>255 pages</span>
+            </div>
+          </div>
+          <div class="card" onclick="showBookInfo('ender')">
+            <div class="card-image">📚</div>
+            <div class="card-title">Ender's Game</div>
+            <div class="card-subtitle">Orson Scott Card</div>
+            <div class="card-meta">
+              <span>Sci-Fi</span>
+              <span>324 pages</span>
+            </div>
+          </div>
+          <div class="card" onclick="showBookInfo('neuromancer')">
+            <div class="card-image">📚</div>
+            <div class="card-title">Neuromancer</div>
+            <div class="card-subtitle">William Gibson</div>
+            <div class="card-meta">
+              <span>Cyberpunk</span>
+              <span>271 pages</span>
+            </div>
+          </div>
+          <div class="card" onclick="showBookInfo('hitchhiker')">
+            <div class="card-image">📚</div>
+            <div class="card-title">The Hitchhiker's Guide</div>
+            <div class="card-subtitle">Douglas Adams</div>
+            <div class="card-meta">
+              <span>Sci-Fi Comedy</span>
+              <span>193 pages</span>
+            </div>
+          </div>
+          <div class="card" onclick="showBookInfo('redmars')">
+            <div class="card-image">📚</div>
+            <div class="card-title">Red Mars</div>
+            <div class="card-subtitle">Kim Stanley Robinson</div>
+            <div class="card-meta">
+              <span>Hard Sci-Fi</span>
+              <span>572 pages</span>
+            </div>
+          </div>
+          <div class="card" onclick="showBookInfo('threebody')">
+            <div class="card-image">📚</div>
+            <div class="card-title">The Three-Body Problem</div>
+            <div class="card-subtitle">Liu Cixin</div>
+            <div class="card-meta">
+              <span>Sci-Fi</span>
+              <span>400 pages</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Popup Modal -->
+    <div id="popup" class="popup">
+      <div class="popup-content">
+        <button class="close-btn" onclick="closePopup()">✕</button>
+        <div id="popup-body"></div>
+      </div>
+    </div>
+
+    <script src="js/entertainment.js"></script>
+  </body>
+</html>

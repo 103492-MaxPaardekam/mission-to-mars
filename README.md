@@ -1,14 +1,14 @@
 # 🚀 Mission to Mars - In-Flight Entertainment System
 
 **AstroTech Team Project**  
-*Klas: d1b*  
-*Datum: 20 januari 2026*
+_Klas: d1b_  
+_Datum: 20 januari 2026_
 
 ## 👥 Team
 
-- **Tristan** - Project Lead & Development
-- **Max** - Design & Wireframes  
-- **Musab** - Styling & Mood Board
+- **Tristan** - Project Lead & Styling
+- **Max** - Design & Development
+- **Musab** - Wireframes & Mood Board
 
 ## 📋 Project Overzicht
 
@@ -17,13 +17,14 @@ Een moderne, futuristische in-flight entertainment applicatie ontwikkeld voor UI
 ## ✨ Features
 
 ### 🎬 Entertainment Pagina
+
 - **Films**: 8 sci-fi klassiekers met gedetailleerde info
   - Plot beschrijvingen
   - Cast & crew informatie
   - Ratings en duur
   - Interactieve popups
-  
 - **Muziek**: 8 playlists met volledige tracklijsten
+
   - Space Ambient
   - Electronic Dreams
   - Classical in Space
@@ -40,6 +41,7 @@ Een moderne, futuristische in-flight entertainment applicatie ontwikkeld voor UI
   - En meer klassiekers
 
 ### 🎨 Design Features
+
 - Futuristisch, minimalistisch design
 - Scanlines effect voor authentieke sci-fi uitstraling
 - Smooth animaties en transitions (300ms)
@@ -79,6 +81,7 @@ mission-to-mars/
 ## 📦 Deliverables
 
 ### Team Deliverables
+
 - ✅ Moodboard + stijlonderzoek
 - ✅ Projectplan (H3, H4, H5)
 - ✅ Samenwerkingsovereenkomst
@@ -87,6 +90,7 @@ mission-to-mars/
 - ✅ Teampagina
 
 ### Individuele Deliverables
+
 - ✅ Introductie en projectinhoud (H1, H2)
 - ✅ 2x Low-fidelity prototypes
 - ✅ Reflectieverslag (STARR-methodiek)
@@ -102,6 +106,7 @@ mission-to-mars/
 ## 🎯 MoSCoW Requirements
 
 ### Must Have ✅
+
 - 10+ functionele pagina's
 - Touchscreen navigatie
 - Homepage, flight info, entertainment, game, menu, team pagina
@@ -109,15 +114,18 @@ mission-to-mars/
 - FTP upload
 
 ### Should Have ✅
+
 - Animaties en transitions
 - Mini-dashboard met live data
 - Interactieve popups
 
 ### Could Have
+
 - Extra mini-game
 - Geluidseffecten
 
 ### Won't Have
+
 - Login systeem
 - Database connectie
 - Mobiele versie
@@ -125,11 +133,12 @@ mission-to-mars/
 ## 🚀 Installatie & Gebruik
 
 1. Clone de repository
-2. Open `index.html` in een moderne browser (Chrome aanbevolen)
+2. Open `boot.html` in een moderne browser (Chrome aanbevolen)
 3. Navigeer door de applicatie via de module cards
 4. Klik op entertainment items voor gedetailleerde informatie
 
 ### Of via FTP:
+
 Upload naar webserver en open via URL
 
 ## 📱 Navigatie
@@ -185,4 +194,4 @@ Homepage (index.html)
 **Deadline**: 20 januari 2026  
 **Opdrachtgever**: UISA
 
-*"Op weg naar avontuur en daar voorbij!"* 🚀
+_"Op weg naar avontuur en daar voorbij!"_ 🚀
