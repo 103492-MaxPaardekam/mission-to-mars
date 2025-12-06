@@ -1,0 +1,218 @@
+body {
+  margin: 0;
+  background: #0a0f1a;
+  color: #e9f6ff;
+  font-family: "Roboto", sans-serif;
+  overflow-x: hidden;
+}
+
+.scanlines {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.02) 0px,
+    rgba(255, 255, 255, 0.02) 1px,
+    transparent 3px,
+    transparent 4px
+  );
+  opacity: 0.15;
+  z-index: 50;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 40px;
+  border-bottom: 1px solid rgba(51, 175, 255, 0.25);
+  backdrop-filter: blur(6px);
+  position: relative;
+  z-index: 80;
+}
+
+.logo {
+  font-family: "Orbitron", sans-serif;
+  font-size: 28px;
+  color: #33afff;
+  text-shadow: 0 0 12px #33afff;
+  margin: 0;
+}
+
+.nav a {
+  color: #e9f6ff;
+  margin-left: 25px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.nav a:hover {
+  color: #33afff;
+  text-shadow: 0 0 10px #33afff;
+}
+
+.nav-button {
+  padding: 10px 26px;
+  font-family: "Orbitron";
+  border: 2px solid #33afff;
+  background: rgba(10, 15, 25, 0.7);
+  color: #33afff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.25s;
+  box-shadow: 0 0 8px #33afff inset, 0 0 12px #33afff;
+}
+
+.nav-button:hover {
+  background: #33afff;
+  color: #05070d;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  padding: 40px;
+}
+
+.module-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(51, 175, 255, 0.45);
+  border-radius: 18px;
+  padding: 30px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 40px rgba(51, 175, 255, 0.12);
+  transition: 0.25s;
+  text-align: center;
+}
+
+.module-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  border-color: #33afff;
+  box-shadow: 0 0 55px rgba(51, 175, 255, 0.35);
+}
+
+.module-card h2 {
+  font-family: "Orbitron";
+  color: #33afff;
+  font-size: 22px;
+  margin: 0 0 10px 0;
+  text-shadow: 0 0 12px #33afff;
+}
+
+.map-module {
+  grid-column: span 3;
+}
+
+.map-image {
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 15px;
+}
+
+.metric {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.value {
+  font-size: 34px;
+  font-family: "Orbitron";
+  color: #33afff;
+  text-shadow: 0 0 10px #33afff;
+}
+
+.unit {
+  opacity: 0.8;
+  font-size: 16px;
+}
+
+.bar {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  background: linear-gradient(90deg, #33afff, #6b4cff);
+  box-shadow: 0 0 15px #33afff;
+}
+
+.status-module {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.status-module ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.status-module li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-module li::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #33afff;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #33afff;
+  flex-shrink: 0;
+}
+
+.map-container {
+  position: relative;
+  width: 100%;
+  height: 320px;
+}
+
+.map-grid {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+      to bottom,
+      rgba(51, 175, 255, 0.1) 0px,
+      rgba(51, 175, 255, 0.1) 1px,
+      transparent 4px,
+      transparent 20px
+    ),
+    repeating-linear-gradient(
+      to right,
+      rgba(51, 175, 255, 0.1) 0px,
+      rgba(51, 175, 255, 0.1) 1px,
+      transparent 4px,
+      transparent 20px
+    );
+  border-radius: 12px;
+  box-shadow: inset 0 0 25px rgba(51, 175, 255, 0.25);
+}
+
+#trajectoryCanvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ship-icon {
+  position: absolute;
+  width: 42px;
+  filter: drop-shadow(0 0 10px #33afff);
+  transform: translate(-50%, -50%) rotate(90deg);
+  pointer-events: none;
+}

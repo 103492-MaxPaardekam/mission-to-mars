@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flight Information</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/flight-info.css" />
+  </head>
+
+  <body>
+    <div class="scanlines"></div>
+
+    <header class="header">
+      <h1 class="logo">MISSION TO MARS</h1>
+
+      <button onclick="window.location.href='index.html'" class="nav-button">
+        ← Terug naar Menu
+      </button>
+    </header>
+    <main class="dashboard">
+      <section class="module-card map-module">
+        <h2>Live Trajectory Map</h2>
+
+        <div class="map-container">
+          <div class="map-grid"></div>
+          <canvas id="trajectoryCanvas"></canvas>
+          <img
+            id="shipIcon"
+            src="assets/flight-info/ship.png"
+            class="ship-icon"
+          />
+        </div>
+      </section>
+
+      <section class="module-card">
+        <h2>Snelheid</h2>
+
+        <div class="metric">
+          <span class="value value-velocity">38,200</span>
+          <span class="unit">km/h</span>
+        </div>
+
+        <div class="bar bar-velocity">
+          <div class="fill" style="width: 78%"></div>
+        </div>
+      </section>
+
+      <section class="module-card">
+        <h2>Afstand tot Mars</h2>
+
+        <div class="metric">
+          <span class="value value-distance">54.2M</span>
+          <span class="unit">km</span>
+        </div>
+
+        <div class="bar bar-distance">
+          <div class="fill" style="width: 54%"></div>
+        </div>
+      </section>
+
+      <section class="module-card">
+        <h2>ETA</h2>
+
+        <div class="metric">
+          <span class="value value-eta">142</span>
+          <span class="unit">uur</span>
+        </div>
+
+        <div class="bar bar-eta">
+          <div class="fill" style="width: 88%"></div>
+        </div>
+      </section>
+
+      <section class="module-card status-module">
+        <h2>Ship Status</h2>
+        <ul>
+          <li class="normal">RCS Thrusters: Online</li>
+          <li class="normal">Thermal Control: Optimal</li>
+          <li class="normal">Comms Link: Stabilized</li>
+          <li class="normal">Hull Integrity: 99.4%</li>
+        </ul>
+      </section>
+    </main>
+
+    <script src="js/flight-info.js"></script>
+  </body>
+</html>
