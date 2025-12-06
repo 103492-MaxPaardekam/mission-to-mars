@@ -1,0 +1,153 @@
+body {
+  margin: 0;
+  background: #05070d;
+  color: #33afff;
+  font-family: "Orbitron", sans-serif;
+  overflow: hidden;
+}
+
+.bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  opacity: 0.25;
+  z-index: -3;
+}
+
+.scanlines {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.02) 0,
+    rgba(255, 255, 255, 0.02) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  opacity: 0.4;
+  z-index: 3;
+}
+
+.start-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  animation: fadeIn 1.5s ease forwards;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.start-title {
+  font-size: 50px;
+  color: #33afff;
+  text-shadow: 0 0 16px #33afff;
+}
+
+.press {
+  font-size: 20px;
+  opacity: 0.7;
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 80%;
+  z-index: 10;
+}
+
+.boot-title,
+.start-title {
+  animation: glitch 1.6s infinite;
+}
+
+@keyframes glitch {
+  0% {
+    text-shadow: 2px 2px #33afff;
+  }
+  20% {
+    text-shadow: -3px -3px #6b4cff;
+  }
+  40% {
+    text-shadow: 4px 2px #33afff;
+  }
+  60% {
+    text-shadow: -2px 4px #6b4cff;
+  }
+  100% {
+    text-shadow: 0 0 12px #33afff;
+  }
+}
+
+.terminal {
+  font-size: 16px;
+  text-align: left;
+  margin: 0 auto 30px auto;
+  width: 320px;
+}
+
+.type {
+  opacity: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #33afff;
+}
+
+.loader {
+  width: 340px;
+  height: 12px;
+  border: 2px solid #33afff;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #33afff, #6b4cff);
+  box-shadow: 0 0 20px #33afff;
+  animation: load 5s ease forwards;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes load {
+  to {
+    width: 100%;
+  }
+}

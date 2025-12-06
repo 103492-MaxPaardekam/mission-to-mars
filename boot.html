@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AstroTech - Welkom!</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/boot.css" />
+  </head>
+  <body>
+    <video autoplay muted loop playsinline class="bg-video">
+      <source src="assets/boot/planet.mp4" type="video/mp4" />
+    </video>
+
+    <div class="scanlines"></div>
+
+    <div id="start-screen" class="start-container">
+      <h1 class="start-title glitch">MISSION TO MARS</h1>
+      <p class="press">KLIK OM TE STARTEN</p>
+    </div>
+
+    <div id="boot-sequence" class="center hidden">
+      <h1 class="boot-title glitch">UISA // STARLINK NAVIGATOR</h1>
+      <div class="boot-sub">SYSTEM BOOT</div>
+
+      <div class="terminal">
+        <p class="type" id="line1"></p>
+        <p class="type" id="line2"></p>
+        <p class="type" id="line3"></p>
+        <p class="type" id="line4"></p>
+      </div>
+
+      <div class="loader">
+        <div class="bar"></div>
+      </div>
+    </div>
+
+    <script src="js/boot.js"></script>
+  </body>
+</html>
