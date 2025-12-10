@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Holodeck - Mission to Mars</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/vr-holodeck.css" />
+  </head>
+  <body>
+    <div class="scanlines"></div>
+    <div class="holographic-grid"></div>
+
+    <header class="header">
+      <h1 class="logo">HOLODECK CONTROL</h1>
+      <button onclick="window.location.href='index.html'" class="boot-button">
+        ← Terug naar Home
+      </button>
+    </header>
+
+    <main class="content-wrapper">
+      <div class="status-bar">
+        <div class="status-item">
+          <span class="status-label">HOLODECK STATUS:</span>
+          <span class="status-value available">BESCHIKBAAR</span>
+        </div>
+        <div class="status-item">
+          <span class="status-label">ACTIVE PROGRAM:</span>
+          <span class="status-value">NONE</span>
+        </div>
+        <div class="status-item">
+          <span class="status-label">PROJECTOREN:</span>
+          <span class="status-value online">ONLINE</span>
+        </div>
+      </div>
+
+      <h2 class="page-title">HOLODECK PROGRAMMA BIBLIOTHEEK</h2>
+      <p class="subtitle">
+        Selecteer een programma om de holodeck kamer te activeren
+      </p>
+
+      <div class="program-grid">
+        <div class="program-card" onclick="loadProgram('combat')">
+          <div class="hologram-preview">
+            <div class="holo-effect"></div>
+            <div class="preview-icon">⚔️</div>
+          </div>
+          <div class="program-info">
+            <h3 class="program-title">GEVECHTS TRAINING</h3>
+            <p class="program-code">PROG-CT-001</p>
+            <p class="program-desc">
+              Verbeter je reflexen en tactische vaardigheden in gesimuleerde
+              gevechtsscenario's
+            </p>
+            <div class="program-tags">
+              <span class="tag">Training</span>
+              <span class="tag">Actief</span>
+              <span class="tag difficulty-high">Hoog</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="program-card" onclick="loadProgram('beach')">
+          <div class="hologram-preview">
+            <div class="holo-effect"></div>
+            <div class="preview-icon">🏖️</div>
+          </div>
+          <div class="program-info">
+            <h3 class="program-title">TROPISCH STRAND</h3>
+            <p class="program-code">PROG-RE-003</p>
+            <p class="program-desc">
+              Ontspan op een zonnig strand met golven, zand en een perfecte
+              zonsondergang
+            </p>
+            <div class="program-tags">
+              <span class="tag">Relaxatie</span>
+              <span class="tag">Natuur</span>
+              <span class="tag difficulty-low">Laag</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="program-card" onclick="loadProgram('rome')">
+          <div class="hologram-preview">
+            <div class="holo-effect"></div>
+            <div class="preview-icon">🏛️</div>
+          </div>
+          <div class="program-info">
+            <h3 class="program-title">ANCIENT ROME</h3>
+            <p class="program-code">PROG-HI-012</p>
+            <p class="program-desc">
+              Wandel door het Colosseum en Forum Romanum op het hoogtepunt van
+              het Romeinse Rijk
+            </p>
+            <div class="program-tags">
+              <span class="tag">Historisch</span>
+              <span class="tag">Educatief</span>
+              <span class="tag difficulty-low">Laag</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="program-card" onclick="loadProgram('mars')">
+          <div class="hologram-preview">
+            <div class="holo-effect"></div>
+            <div class="preview-icon">🔴</div>
+          </div>
+          <div class="program-info">
+            <h3 class="program-title">MARS LANDING SIM</h3>
+            <p class="program-code">PROG-TR-008</p>
+            <p class="program-desc">
+              Oefen je Mars landing procedures voordat je echt aankomt op de
+              rode planeet
+            </p>
+            <div class="program-tags">
+              <span class="tag">Training</span>
+              <span class="tag">Simulatie</span>
+              <span class="tag difficulty-mid">Gemiddeld</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="program-card" onclick="loadProgram('cafe')">
+          <div class="hologram-preview">
+            <div class="holo-effect"></div>
+            <div class="preview-icon">☕</div>
+          </div>
+          <div class="program-info">
+            <h3 class="program-title">PARIJS CAFÉ</h3>
+            <p class="program-code">PROG-SO-005</p>
+            <p class="program-desc">
+              Socialiseer in een gezellig Parijse café, compleet met
+              holografische bezoekers
+            </p>
+            <div class="program-tags">
+              <span class="tag">Sociaal</span>
+              <span class="tag">Relaxatie</span>
+              <span class="tag difficulty-low">Laag</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="program-card" onclick="loadProgram('space')">
+          <div class="hologram-preview">
+            <div class="holo-effect"></div>
+            <div class="preview-icon">🌌</div>
+          </div>
+          <div class="program-info">
+            <h3 class="program-title">DEEP SPACE EVA</h3>
+            <p class="program-code">PROG-TR-015</p>
+            <p class="program-desc">
+              Oefen spacewalk procedures in een volledig gesimuleerde
+              ruimteomgeving
+            </p>
+            <div class="program-tags">
+              <span class="tag">Training</span>
+              <span class="tag">Zero-G</span>
+              <span class="tag difficulty-high">Hoog</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="program-card" onclick="loadProgram('forest')">
+          <div class="hologram-preview">
+            <div class="holo-effect"></div>
+            <div class="preview-icon">🌲</div>
+          </div>
+          <div class="program-info">
+            <h3 class="program-title">SEQUOIA FOREST</h3>
+            <p class="program-code">PROG-RE-007</p>
+            <p class="program-desc">
+              Loop tussen eeuwenoude reuzenbomen in California's Sequoia
+              National Park
+            </p>
+            <div class="program-tags">
+              <span class="tag">Natuur</span>
+              <span class="tag">Relaxatie</span>
+              <span class="tag difficulty-low">Laag</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="program-card" onclick="loadProgram('sports')">
+          <div class="hologram-preview">
+            <div class="holo-effect"></div>
+            <div class="preview-icon">🏀</div>
+          </div>
+          <div class="program-info">
+            <h3 class="program-title">SPORT ARENA</h3>
+            <p class="program-code">PROG-SP-004</p>
+            <p class="program-desc">
+              Speel basketball, tennis of voetbal met aangepaste zwaartekracht
+              instellingen
+            </p>
+            <div class="program-tags">
+              <span class="tag">Sport</span>
+              <span class="tag">Actief</span>
+              <span class="tag difficulty-mid">Gemiddeld</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="program-card" onclick="loadProgram('arctic')">
+          <div class="hologram-preview">
+            <div class="holo-effect"></div>
+            <div class="preview-icon">❄️</div>
+          </div>
+          <div class="program-info">
+            <h3 class="program-title">ARCTIC EXPEDITION</h3>
+            <p class="program-code">PROG-AD-011</p>
+            <p class="program-desc">
+              Verken de ijzige wildernis en ontmoet arctische wildlife in een
+              veilige omgeving
+            </p>
+            <div class="program-tags">
+              <span class="tag">Avontuur</span>
+              <span class="tag">Natuur</span>
+              <span class="tag difficulty-mid">Gemiddeld</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <button class="close-btn" onclick="closeModal()">✕</button>
+        <div id="modal-body"></div>
+      </div>
+    </div>
+
+    <script src="js/vr-holodeck.js"></script>
+  </body>
+</html>
