@@ -1,433 +1,460 @@
 // Script verplaatst uit het originele HTML-bestand.
 // Zorg dat dit bestand in dezelfde map staat als index.html.
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Back button functionality
-    const backBtn = document.getElementById('backBtn');
-    backBtn.addEventListener('click', () => {
-        window.location.href = '/index.html';
+document.addEventListener("DOMContentLoaded", () => {
+  const canvas = document.getElementById("tetris");
+  const context = canvas.getContext("2d");
+  const previewCanvas = document.getElementById("preview");
+  const previewContext = previewCanvas.getContext("2d");
+  const holdCanvas = document.getElementById("hold");
+  const holdContext = holdCanvas.getContext("2d");
+  const scoreElement = document.getElementById("score");
+  const levelElement = document.getElementById("level");
+  const blockSize = 20;
+  const cols = canvas.width / blockSize;
+  const rows = canvas.height / blockSize;
+  let score = 0;
+  let level = 1;
+  let linesCleared = 0;
+  let canHold = true;
+
+  const board = Array(rows)
+    .fill()
+    .map(() => Array(cols).fill(0));
+
+  const pieces = [
+    [[1, 1, 1, 1]], // I
+    [
+      [1, 1],
+      [1, 1],
+    ], // O
+    [
+      [1, 1, 1],
+      [0, 1, 0],
+    ], // T
+    [
+      [1, 1, 1],
+      [1, 0, 0],
+    ], // L
+    [
+      [1, 1, 1],
+      [0, 0, 1],
+    ], // J
+    [
+      [1, 1, 0],
+      [0, 1, 1],
+    ], // S
+    [
+      [0, 1, 1],
+      [1, 1, 0],
+    ], // Z
+  ];
+
+  const colors = [
+    "#FF0D72",
+    "#0DC2FF",
+    "#0DFF72",
+    "#F538FF",
+    "#FF8E0D",
+    "#FFE138",
+    "#3877FF",
+  ];
+
+  let currentPiece = null;
+  let currentPiecePos = { x: 0, y: 0 };
+  let currentColor = "";
+  let currentPieceIndex = 0;
+  let nextPiece = null;
+  let nextColor = "";
+  let nextPieceIndex = 0;
+  let holdPiece = null;
+  let holdColor = "";
+  let holdPieceIndex = -1;
+
+  function createPiece() {
+    if (nextPiece === null) {
+      nextPieceIndex = Math.floor(Math.random() * pieces.length);
+      nextPiece = pieces[nextPieceIndex];
+      nextColor = colors[nextPieceIndex];
+    }
+
+    currentPiece = nextPiece;
+    currentColor = nextColor;
+    currentPieceIndex = nextPieceIndex;
+
+    const pieceIndex = Math.floor(Math.random() * pieces.length);
+    nextPiece = pieces[pieceIndex];
+    nextColor = colors[pieceIndex];
+    nextPieceIndex = pieceIndex;
+
+    currentPiecePos = {
+      x: Math.floor((cols - currentPiece[0].length) / 2),
+      y: 0,
+    };
+
+    canHold = true;
+    drawPreview();
+    drawHold();
+  }
+
+  function drawPiece(context, piece, color, canvas) {
+    const previewBlockSize = 20;
+    const offsetX = (canvas.width - piece[0].length * previewBlockSize) / 2;
+    const offsetY = (canvas.height - piece.length * previewBlockSize) / 2;
+
+    context.fillStyle = color;
+    piece.forEach((row, y) => {
+      row.forEach((value, x) => {
+        if (value) {
+          context.fillRect(
+            offsetX + x * previewBlockSize,
+            offsetY + y * previewBlockSize,
+            previewBlockSize - 1,
+            previewBlockSize - 1,
+          );
+        }
+      });
+    });
+  }
+
+  function drawPreview() {
+    previewContext.fillStyle = "#000";
+    previewContext.fillRect(0, 0, previewCanvas.width, previewCanvas.height);
+    if (nextPiece) {
+      drawPiece(previewContext, nextPiece, nextColor, previewCanvas);
+    }
+  }
+
+  function drawHold() {
+    holdContext.fillStyle = "#000";
+    holdContext.fillRect(0, 0, holdCanvas.width, holdCanvas.height);
+    if (holdPiece) {
+      drawPiece(holdContext, holdPiece, holdColor, holdCanvas);
+    }
+  }
+
+  function holdCurrentPiece() {
+    if (!canHold) return;
+
+    if (holdPiece === null) {
+      holdPiece = currentPiece;
+      holdColor = currentColor;
+      holdPieceIndex = currentPieceIndex;
+      createPiece();
+    } else {
+      const tempPiece = currentPiece;
+      const tempColor = currentColor;
+      const tempIndex = currentPieceIndex;
+
+      currentPiece = holdPiece;
+      currentColor = holdColor;
+      currentPieceIndex = holdPieceIndex;
+
+      holdPiece = tempPiece;
+      holdColor = tempColor;
+      holdPieceIndex = tempIndex;
+
+      currentPiecePos = {
+        x: Math.floor((cols - currentPiece[0].length) / 2),
+        y: 0,
+      };
+    }
+
+    canHold = false;
+    drawHold();
+  }
+
+  function collide(piece = currentPiece, pos = currentPiecePos) {
+    for (let y = 0; y < piece.length; y++) {
+      for (let x = 0; x < piece[y].length; x++) {
+        if (piece[y][x]) {
+          const boardX = pos.x + x;
+          const boardY = pos.y + y;
+
+          if (
+            boardX < 0 ||
+            boardX >= cols ||
+            boardY >= rows ||
+            (boardY >= 0 && board[boardY][boardX])
+          ) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  function getGhostPosition() {
+    const ghostPos = { ...currentPiecePos };
+    while (!collide(currentPiece, { ...ghostPos, y: ghostPos.y + 1 })) {
+      ghostPos.y++;
+    }
+    return ghostPos;
+  }
+
+  function rotate() {
+    const rotated = currentPiece[0].map((_, i) =>
+      currentPiece.map((row) => row[i]).reverse(),
+    );
+    const prevPiece = currentPiece;
+    currentPiece = rotated;
+    if (collide()) {
+      currentPiece = prevPiece;
+    }
+  }
+
+  function merge() {
+    currentPiece.forEach((row, y) => {
+      row.forEach((value, x) => {
+        if (value) {
+          const boardY = currentPiecePos.y + y;
+          if (boardY >= 0) {
+            board[boardY][currentPiecePos.x + x] = currentColor;
+          }
+        }
+      });
+    });
+  }
+
+  function clearLines() {
+    let lines = 0;
+    outer: for (let y = rows - 1; y >= 0; y--) {
+      for (let x = 0; x < cols; x++) {
+        if (!board[y][x]) continue outer;
+      }
+
+      const row = board.splice(y, 1)[0];
+      board.unshift(row.fill(0));
+      y++;
+      lines++;
+    }
+    if (lines > 0) {
+      linesCleared += lines;
+      score += lines * 100 * level;
+      scoreElement.textContent = score;
+
+      const newLevel = Math.floor(linesCleared / 10) + 1;
+      if (newLevel !== level) {
+        level = newLevel;
+        levelElement.textContent = level;
+      }
+    }
+  }
+
+  function draw() {
+    context.fillStyle = "#000";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw board
+    board.forEach((row, y) => {
+      row.forEach((value, x) => {
+        if (value) {
+          context.fillStyle = value;
+          context.fillRect(
+            x * blockSize,
+            y * blockSize,
+            blockSize - 1,
+            blockSize - 1,
+          );
+        }
+      });
     });
 
-    const canvas = document.getElementById('tetris');
-    const context = canvas.getContext('2d');
-    const previewCanvas = document.getElementById('preview');
-    const previewContext = previewCanvas.getContext('2d');
-    const holdCanvas = document.getElementById('hold');
-    const holdContext = holdCanvas.getContext('2d');
-    const scoreElement = document.getElementById('score');
-    const levelElement = document.getElementById('level');
-    const blockSize = 20;
-    const cols = canvas.width / blockSize;
-    const rows = canvas.height / blockSize;
-    let score = 0;
-    let level = 1;
-    let linesCleared = 0;
-    let canHold = true;
+    // Draw ghost piece
+    if (currentPiece) {
+      const ghostPos = getGhostPosition();
+      context.fillStyle = `${currentColor}33`;
+      currentPiece.forEach((row, y) => {
+        row.forEach((value, x) => {
+          if (value) {
+            context.fillRect(
+              (ghostPos.x + x) * blockSize,
+              (ghostPos.y + y) * blockSize,
+              blockSize - 1,
+              blockSize - 1,
+            );
+          }
+        });
+      });
+    }
 
-    const board = Array(rows).fill().map(() => Array(cols).fill(0));
+    // Draw current piece
+    if (currentPiece) {
+      context.fillStyle = currentColor;
+      currentPiece.forEach((row, y) => {
+        row.forEach((value, x) => {
+          if (value) {
+            context.fillRect(
+              (currentPiecePos.x + x) * blockSize,
+              (currentPiecePos.y + y) * blockSize,
+              blockSize - 1,
+              blockSize - 1,
+            );
+          }
+        });
+      });
+    }
+  }
 
-    const pieces = [
-        [[1, 1, 1, 1]], // I
-        [[1, 1], [1, 1]], // O
-        [[1, 1, 1], [0, 1, 0]], // T
-        [[1, 1, 1], [1, 0, 0]], // L
-        [[1, 1, 1], [0, 0, 1]], // J
-        [[1, 1, 0], [0, 1, 1]], // S
-        [[0, 1, 1], [1, 1, 0]]  // Z
-    ];
+  let dropCounter = 0;
+  let lastTime = 0;
+  let dropInterval = 1000;
 
-    const colors = [
-        '#FF0D72', '#0DC2FF', '#0DFF72',
-        '#F538FF', '#FF8E0D', '#FFE138', '#3877FF'
-    ];
+  function update(time = 0) {
+    const deltaTime = time - lastTime;
+    lastTime = time;
+    dropCounter += deltaTime;
 
-    let currentPiece = null;
-    let currentPiecePos = { x: 0, y: 0 };
-    let currentColor = '';
-    let currentPieceIndex = 0;
-    let nextPiece = null;
-    let nextColor = '';
-    let nextPieceIndex = 0;
-    let holdPiece = null;
-    let holdColor = '';
-    let holdPieceIndex = -1;
+    dropInterval = Math.max(100, 1000 - (level - 1) * 100);
 
-    function createPiece() {
-        if (nextPiece === null) {
-            nextPieceIndex = Math.floor(Math.random() * pieces.length);
-            nextPiece = pieces[nextPieceIndex];
-            nextColor = colors[nextPieceIndex];
-        }
+    if (dropCounter > dropInterval) {
+      drop();
+    }
 
-        currentPiece = nextPiece;
-        currentColor = nextColor;
-        currentPieceIndex = nextPieceIndex;
-        
-        const pieceIndex = Math.floor(Math.random() * pieces.length);
-        nextPiece = pieces[pieceIndex];
-        nextColor = colors[pieceIndex];
-        nextPieceIndex = pieceIndex;
-        
-        currentPiecePos = {
-            x: Math.floor((cols - currentPiece[0].length) / 2),
-            y: 0
-        };
+    draw();
+    requestAnimationFrame(update);
+  }
 
-        canHold = true;
-        drawPreview();
+  function drop() {
+    currentPiecePos.y++;
+    if (collide()) {
+      currentPiecePos.y--;
+      merge();
+      clearLines();
+      createPiece();
+      if (collide()) {
+        board.forEach((row) => row.fill(0));
+        score = 0;
+        level = 1;
+        linesCleared = 0;
+        holdPiece = null;
+        holdColor = "";
+        holdPieceIndex = -1;
+        scoreElement.textContent = score;
+        levelElement.textContent = level;
         drawHold();
+      }
     }
+    dropCounter = 0;
+  }
 
-    function drawPiece(context, piece, color, canvas) {
-        const previewBlockSize = 20;
-        const offsetX = (canvas.width - piece[0].length * previewBlockSize) / 2;
-        const offsetY = (canvas.height - piece.length * previewBlockSize) / 2;
+  document.addEventListener("keydown", (event) => {
+    if (!currentPiece) return;
 
-        context.fillStyle = color;
-        piece.forEach((row, y) => {
-            row.forEach((value, x) => {
-                if (value) {
-                    context.fillRect(
-                        offsetX + x * previewBlockSize,
-                        offsetY + y * previewBlockSize,
-                        previewBlockSize - 1,
-                        previewBlockSize - 1
-                    );
-                }
-            });
-        });
+    switch (event.keyCode) {
+      case 37: // Left
+        currentPiecePos.x--;
+        if (collide()) currentPiecePos.x++;
+        break;
+      case 39: // Right
+        currentPiecePos.x++;
+        if (collide()) currentPiecePos.x--;
+        break;
+      case 40: // Down
+        drop();
+        break;
+      case 38: // Up (rotate)
+        rotate();
+        break;
+      case 32: // Space (hard drop)
+        while (!collide()) {
+          currentPiecePos.y++;
+        }
+        currentPiecePos.y--;
+        drop();
+        break;
+      case 16: // Shift (hold)
+        holdCurrentPiece();
+        break;
     }
+  });
 
-    function drawPreview() {
-        previewContext.fillStyle = '#000';
-        previewContext.fillRect(0, 0, previewCanvas.width, previewCanvas.height);
-        if (nextPiece) {
-            drawPiece(previewContext, nextPiece, nextColor, previewCanvas);
+  // Start game
+  createPiece();
+  update();
+
+  // ------------------------
+  // TOUCHSCREEN & BUTTON CONTROLS
+  // ------------------------
+  const buttons = document.querySelectorAll("#touch-controls button");
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+
+      if (!currentPiece) return;
+
+      const action = btn.getAttribute("data-action");
+
+      if (action === "left") {
+        currentPiecePos.x--;
+        if (collide()) currentPiecePos.x++;
+      }
+
+      if (action === "right") {
+        currentPiecePos.x++;
+        if (collide()) currentPiecePos.x--;
+      }
+
+      if (action === "rotate") {
+        rotate();
+      }
+
+      if (action === "down") {
+        drop();
+      }
+
+      if (action === "hard") {
+        while (!collide()) {
+          currentPiecePos.y++;
         }
-    }
+        currentPiecePos.y--;
+        drop();
+      }
 
-    function drawHold() {
-        holdContext.fillStyle = '#000';
-        holdContext.fillRect(0, 0, holdCanvas.width, holdCanvas.height);
-        if (holdPiece) {
-            drawPiece(holdContext, holdPiece, holdColor, holdCanvas);
-        }
-    }
-
-    function holdCurrentPiece() {
-        if (!canHold) return;
-
-        if (holdPiece === null) {
-            holdPiece = currentPiece;
-            holdColor = currentColor;
-            holdPieceIndex = currentPieceIndex;
-            createPiece();
-        } else {
-            const tempPiece = currentPiece;
-            const tempColor = currentColor;
-            const tempIndex = currentPieceIndex;
-
-            currentPiece = holdPiece;
-            currentColor = holdColor;
-            currentPieceIndex = holdPieceIndex;
-            
-            holdPiece = tempPiece;
-            holdColor = tempColor;
-            holdPieceIndex = tempIndex;
-
-            currentPiecePos = {
-                x: Math.floor((cols - currentPiece[0].length) / 2),
-                y: 0
-            };
-        }
-
-        canHold = false;
-        drawHold();
-    }
-
-    function collide(piece = currentPiece, pos = currentPiecePos) {
-        for (let y = 0; y < piece.length; y++) {
-            for (let x = 0; x < piece[y].length; x++) {
-                if (piece[y][x]) {
-                    const boardX = pos.x + x;
-                    const boardY = pos.y + y;
-
-                    if (boardX < 0 || boardX >= cols ||
-                        boardY >= rows ||
-                        (boardY >= 0 && board[boardY][boardX])) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    function getGhostPosition() {
-        const ghostPos = { ...currentPiecePos };
-        while (!collide(currentPiece, { ...ghostPos, y: ghostPos.y + 1 })) {
-            ghostPos.y++;
-        }
-        return ghostPos;
-    }
-
-    function rotate() {
-        const rotated = currentPiece[0].map((_, i) =>
-            currentPiece.map(row => row[i]).reverse()
-        );
-        const prevPiece = currentPiece;
-        currentPiece = rotated;
-        if (collide()) {
-            currentPiece = prevPiece;
-        }
-    }
-
-    function merge() {
-        currentPiece.forEach((row, y) => {
-            row.forEach((value, x) => {
-                if (value) {
-                    const boardY = currentPiecePos.y + y;
-                    if (boardY >= 0) {
-                        board[boardY][currentPiecePos.x + x] = currentColor;
-                    }
-                }
-            });
-        });
-    }
-
-    function clearLines() {
-        let lines = 0;
-        outer: for (let y = rows - 1; y >= 0; y--) {
-            for (let x = 0; x < cols; x++) {
-                if (!board[y][x]) continue outer;
-            }
-            
-            const row = board.splice(y, 1)[0];
-            board.unshift(row.fill(0));
-            y++;
-            lines++;
-        }
-        if (lines > 0) {
-            linesCleared += lines;
-            score += lines * 100 * level;
-            scoreElement.textContent = `Score: ${score}`;
-            
-            const newLevel = Math.floor(linesCleared / 10) + 1;
-            if (newLevel !== level) {
-                level = newLevel;
-                levelElement.textContent = `Level: ${level}`;
-            }
-        }
-    }
-
-    function draw() {
-        context.fillStyle = '#000';
-        context.fillRect(0, 0, canvas.width, canvas.height);
-
-        // Draw board
-        board.forEach((row, y) => {
-            row.forEach((value, x) => {
-                if (value) {
-                    context.fillStyle = value;
-                    context.fillRect(x * blockSize, y * blockSize, blockSize - 1, blockSize - 1);
-                }
-            });
-        });
-
-        // Draw ghost piece
-        if (currentPiece) {
-            const ghostPos = getGhostPosition();
-            context.fillStyle = `${currentColor}33`;
-            currentPiece.forEach((row, y) => {
-                row.forEach((value, x) => {
-                    if (value) {
-                        context.fillRect(
-                            (ghostPos.x + x) * blockSize,
-                            (ghostPos.y + y) * blockSize,
-                            blockSize - 1,
-                            blockSize - 1
-                        );
-                    }
-                });
-            });
-        }
-
-        // Draw current piece
-        if (currentPiece) {
-            context.fillStyle = currentColor;
-            currentPiece.forEach((row, y) => {
-                row.forEach((value, x) => {
-                    if (value) {
-                        context.fillRect(
-                            (currentPiecePos.x + x) * blockSize,
-                            (currentPiecePos.y + y) * blockSize,
-                            blockSize - 1,
-                            blockSize - 1
-                        );
-                    }
-                });
-            });
-        }
-    }
-
-    let dropCounter = 0;
-    let lastTime = 0;
-    let dropInterval = 1000;
-
-    function update(time = 0) {
-        const deltaTime = time - lastTime;
-        lastTime = time;
-        dropCounter += deltaTime;
-
-        dropInterval = Math.max(100, 1000 - (level - 1) * 100);
-
-        if (dropCounter > dropInterval) {
-            drop();
-        }
-
-        draw();
-        requestAnimationFrame(update);
-    }
-
-    function drop() {
-        currentPiecePos.y++;
-        if (collide()) {
-            currentPiecePos.y--;
-            merge();
-            clearLines();
-            createPiece();
-            if (collide()) {
-                board.forEach(row => row.fill(0));
-                score = 0;
-                level = 1;
-                linesCleared = 0;
-                holdPiece = null;
-                holdColor = '';
-                holdPieceIndex = -1;
-                scoreElement.textContent = `Score: ${score}`;
-                levelElement.textContent = `Level: ${level}`;
-                drawHold();
-            }
-        }
-        dropCounter = 0;
-    }
-
-    document.addEventListener('keydown', event => {
-        if (!currentPiece) return;
-
-        switch (event.keyCode) {
-            case 37: // Left
-                currentPiecePos.x--;
-                if (collide()) currentPiecePos.x++;
-                break;
-            case 39: // Right
-                currentPiecePos.x++;
-                if (collide()) currentPiecePos.x--;
-                break;
-            case 40: // Down
-                drop();
-                break;
-            case 38: // Up (rotate)
-                rotate();
-                break;
-            case 32: // Space (hard drop)
-                while (!collide()) {
-                    currentPiecePos.y++;
-                }
-                currentPiecePos.y--;
-                drop();
-                break;
-            case 16: // Shift (hold)
-                holdCurrentPiece();
-                break;
-        }
+      if (action === "hold") {
+        holdCurrentPiece();
+      }
     });
 
-    // Start game
-    createPiece();
-    update();
+    // Also support click events for testing/desktop
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
 
-    // ------------------------
-    // TOUCHSCREEN & BUTTON CONTROLS
-    // ------------------------
-    const buttons = document.querySelectorAll('#touch-controls button');
+      if (!currentPiece) return;
 
-    buttons.forEach(btn => {
-        btn.addEventListener('touchstart', (e) => {
-            e.preventDefault();
+      const action = btn.getAttribute("data-action");
 
-            if (!currentPiece) return;
+      if (action === "left") {
+        currentPiecePos.x--;
+        if (collide()) currentPiecePos.x++;
+      }
 
-            const action = btn.getAttribute('data-action');
+      if (action === "right") {
+        currentPiecePos.x++;
+        if (collide()) currentPiecePos.x--;
+      }
 
-            if (action === 'left') {
-                currentPiecePos.x--;
-                if (collide()) currentPiecePos.x++;
-            }
+      if (action === "rotate") {
+        rotate();
+      }
 
-            if (action === 'right') {
-                currentPiecePos.x++;
-                if (collide()) currentPiecePos.x--;
-            }
+      if (action === "down") {
+        drop();
+      }
 
-            if (action === 'rotate') {
-                rotate();
-            }
+      if (action === "hard") {
+        while (!collide()) {
+          currentPiecePos.y++;
+        }
+        currentPiecePos.y--;
+        drop();
+      }
 
-            if (action === 'down') {
-                drop();
-            }
-
-            if (action === 'hard') {
-                while (!collide()) {
-                    currentPiecePos.y++;
-                }
-                currentPiecePos.y--;
-                drop();
-            }
-
-            if (action === 'hold') {
-                holdCurrentPiece();
-            }
-        });
-
-        // Also support click events for testing/desktop
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-
-            if (!currentPiece) return;
-
-            const action = btn.getAttribute('data-action');
-
-            if (action === 'left') {
-                currentPiecePos.x--;
-                if (collide()) currentPiecePos.x++;
-            }
-
-            if (action === 'right') {
-                currentPiecePos.x++;
-                if (collide()) currentPiecePos.x--;
-            }
-
-            if (action === 'rotate') {
-                rotate();
-            }
-
-            if (action === 'down') {
-                drop();
-            }
-
-            if (action === 'hard') {
-                while (!collide()) {
-                    currentPiecePos.y++;
-                }
-                currentPiecePos.y--;
-                drop();
-            }
-
-            if (action === 'hold') {
-                holdCurrentPiece();
-            }
-        });
+      if (action === "hold") {
+        holdCurrentPiece();
+      }
     });
+  });
 });
