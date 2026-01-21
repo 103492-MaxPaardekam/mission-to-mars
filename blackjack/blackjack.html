@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blackjack - Mission to Mars</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="blackjack.css" />
+  </head>
+  <body>
+    <div class="scanlines"></div>
+
+    <!-- Menu Screen -->
+    <div id="screen-menu" class="screen active">
+      <div class="menu-container">
+        <h1 class="game-title">BLACK<span class="accent">JACK</span></h1>
+        <p class="subtitle">🎰 Space Casino 🎰</p>
+
+        <div class="menu-buttons">
+          <button class="btn btn-primary" id="btn-start">
+            <svg
+              class="btn-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polygon points="5,3 19,12 5,21" />
+            </svg>
+            Start Gokken
+          </button>
+          <button class="btn btn-secondary" id="btn-howto">
+            <svg
+              class="btn-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+            Hoe te Spelen
+          </button>
+          <button class="btn btn-secondary" id="btn-back-games">
+            <svg
+              class="btn-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Terug naar Casino
+          </button>
+        </div>
+
+        <div class="stats-display">
+          <div class="stat-item balance">
+            <span class="label">💰 Balans</span>
+            <span class="value" id="menu-balance">1000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- How to Play Screen -->
+    <div id="screen-howto" class="screen">
+      <div class="panel-container">
+        <h2 class="panel-title">Hoe te Spelen</h2>
+
+        <div class="howto-content">
+          <div class="howto-section">
+            <h3>🎯 Doel</h3>
+            <p>
+              Kom zo dicht mogelijk bij 21 punten zonder erover te gaan. Versla
+              de dealer en win je inzet!
+            </p>
+          </div>
+
+          <div class="howto-section">
+            <h3>💰 Inzetten</h3>
+            <p>
+              Kies je inzet voor elke ronde. Win je? Dan krijg je
+              <strong>2x</strong> je inzet terug!<br />
+              Blackjack betaalt <strong>2.5x</strong> je inzet!
+            </p>
+          </div>
+
+          <div class="howto-section">
+            <h3>🃏 Kaartwaarden</h3>
+            <p>
+              <strong>2-10</strong> — Face value<br />
+              <strong>J, Q, K</strong> — 10 punten<br />
+              <strong>Aas</strong> — 1 of 11 punten
+            </p>
+          </div>
+
+          <div class="howto-section">
+            <h3>🎮 Acties</h3>
+            <p>
+              <strong>Hit</strong> — Neem nog een kaart<br />
+              <strong>Stand</strong> — Stop met kaarten nemen<br />
+              <strong>Double</strong> — Verdubbel inzet, neem 1 kaart
+            </p>
+          </div>
+
+          <div class="howto-section">
+            <h3>⚡ Uitbetalingen</h3>
+            <ul>
+              <li><strong>Win</strong> = 2x inzet</li>
+              <li><strong>Blackjack</strong> = 2.5x inzet</li>
+              <li><strong>Push</strong> = Inzet terug</li>
+              <li><strong>Verlies</strong> = Inzet kwijt</li>
+            </ul>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" id="btn-howto-back">Terug</button>
+      </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="screen-game" class="screen">
+      <header class="header">
+        <h1 class="logo">🎰 BLACKJACK</h1>
+        <div class="header-balance">
+          <span class="balance-label">BALANS</span>
+          <span class="balance-value"
+            >💰 <span id="header-balance">1000</span></span
+          >
+        </div>
+      </header>
+
+      <main class="game-table">
+        <!-- Dealer Section -->
+        <div class="player-section dealer-section">
+          <div class="player-label">
+            <span class="name">🎩 DEALER</span>
+            <span class="score" id="dealer-score">?</span>
+          </div>
+          <div class="cards-container" id="dealer-cards"></div>
+        </div>
+
+        <!-- Result Display -->
+        <div id="result-display" class="result-display hidden">
+          <span id="result-text"></span>
+          <span id="result-amount"></span>
+        </div>
+
+        <!-- Player Section -->
+        <div class="player-section player-section-bottom">
+          <div class="cards-container" id="player-cards"></div>
+          <div class="player-label">
+            <span class="name">🧑‍🚀 JIJ</span>
+            <span class="score" id="player-score">0</span>
+          </div>
+        </div>
+
+        <!-- Betting Section -->
+        <div id="betting-section" class="betting-section">
+          <div class="current-bet">
+            <span class="bet-label">INZET</span>
+            <span class="bet-value">💰 <span id="current-bet">0</span></span>
+          </div>
+
+          <div class="chip-rack">
+            <button class="chip chip-10" data-value="10">10</button>
+            <button class="chip chip-25" data-value="25">25</button>
+            <button class="chip chip-50" data-value="50">50</button>
+            <button class="chip chip-100" data-value="100">100</button>
+            <button class="chip chip-500" data-value="500">500</button>
+          </div>
+
+          <div class="bet-actions">
+            <button class="btn btn-clear" id="btn-clear-bet">Reset</button>
+            <button class="btn btn-deal" id="btn-deal">DEAL</button>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons hidden" id="action-buttons">
+          <button class="btn btn-action btn-hit" id="btn-hit">
+            <span class="btn-text">HIT</span>
+          </button>
+          <button class="btn btn-action btn-stand" id="btn-stand">
+            <span class="btn-text">STAND</span>
+          </button>
+          <button class="btn btn-action btn-double" id="btn-double">
+            <span class="btn-text">DOUBLE</span>
+          </button>
+        </div>
+
+        <!-- New Game Button -->
+        <div class="new-game-container hidden" id="new-game-container">
+          <button class="btn btn-primary" id="btn-new-round">
+            Nieuwe Ronde
+          </button>
+          <button class="btn btn-secondary" id="btn-quit">Naar Menu</button>
+        </div>
+      </main>
+    </div>
+
+    <script src="blackjack.js"></script>
+  </body>
+</html>

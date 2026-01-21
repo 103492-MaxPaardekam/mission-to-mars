@@ -1,3 +1,97 @@
+// Jumpscare System - 10% chance on click
+const JumpscareSystem = {
+  chance: 0.1, // 10% chance
+  active: false,
+
+  init() {
+    // Create jumpscare overlay
+    const overlay = document.createElement("div");
+    overlay.id = "jumpscare-overlay";
+    overlay.style.cssText = `
+      position: fixed;
+      inset: 0;
+      background: #000;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    `;
+
+    const img = document.createElement("img");
+    img.src = "assets/jumpscare.webp";
+    img.style.cssText = `
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      animation: jumpscareShake 0.05s infinite;
+    `;
+
+    overlay.appendChild(img);
+    document.body.appendChild(overlay);
+
+    // Add shake animation
+    const style = document.createElement("style");
+    style.textContent = `
+      @keyframes jumpscareShake {
+        0%, 100% { transform: translate(0, 0) scale(1.05); }
+        25% { transform: translate(-5px, 5px) scale(1.05); }
+        50% { transform: translate(5px, -5px) scale(1.05); }
+        75% { transform: translate(-5px, -5px) scale(1.05); }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Click to dismiss
+    overlay.addEventListener("click", () => this.hide());
+
+    // Listen for clicks on interactive elements
+    document.addEventListener(
+      "click",
+      (e) => {
+        if (this.active) return;
+
+        const target = e.target.closest("a, button, .module-card");
+        if (target && Math.random() < this.chance) {
+          e.preventDefault();
+          e.stopPropagation();
+          this.show();
+
+          // Store original destination for links
+          if (target.href) {
+            this.pendingNavigation = target.href;
+          }
+        }
+      },
+      true,
+    );
+  },
+
+  show() {
+    this.active = true;
+    const overlay = document.getElementById("jumpscare-overlay");
+    overlay.style.display = "flex";
+
+    // Auto-hide after 0.1 seconds
+    setTimeout(() => this.hide(), 100);
+  },
+
+  hide() {
+    this.active = false;
+    const overlay = document.getElementById("jumpscare-overlay");
+    overlay.style.display = "none";
+
+    // Navigate if there was a pending link
+    if (this.pendingNavigation) {
+      window.location.href = this.pendingNavigation;
+      this.pendingNavigation = null;
+    }
+  },
+};
+
+// Initialize jumpscare system
+JumpscareSystem.init();
+
 const canvas = document.getElementById("telemetryGraph");
 if (canvas) {
   const ctx = canvas.getContext("2d");

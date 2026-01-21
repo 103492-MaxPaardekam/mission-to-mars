@@ -118,6 +118,26 @@ body {
   box-shadow: 0 0 50px rgba(51, 175, 255, 0.35);
 }
 
+.module-card.casino {
+  border-color: rgba(255, 215, 0, 0.5);
+  box-shadow: 0 0 40px rgba(255, 215, 0, 0.15);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.08),
+    rgba(0, 100, 0, 0.1)
+  );
+}
+
+.module-card.casino h2 {
+  color: #ffd700;
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.7);
+}
+
+.module-card.casino:hover {
+  border-color: #ffd700;
+  box-shadow: 0 0 60px rgba(255, 215, 0, 0.4);
+}
+
 .side-panels {
   display: flex;
   flex-direction: column;

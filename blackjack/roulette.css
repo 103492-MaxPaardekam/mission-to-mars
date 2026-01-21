@@ -1,0 +1,826 @@
+/* ============================================
+   Roulette - Space Casino
+   AstroTech Mission to Mars
+   ============================================ */
+
+:root {
+  --bg-dark: #0a0f1a;
+  --bg-card: #111827;
+  --bg-table: #0d5c2e;
+  --bg-table-dark: #094422;
+  --primary: #33afff;
+  --secondary: #6b4cff;
+  --gold: #ffd700;
+  --gold-dark: #b8960b;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --red: #dc2626;
+  --black: #1a1a2e;
+  --green: #16a34a;
+  --text: #f2f2f2;
+  --text-dim: #9ca3af;
+  --border: rgba(51, 175, 255, 0.25);
+  --glow: rgba(51, 175, 255, 0.4);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background: var(--bg-dark);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Scanlines */
+.scanlines {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.02) 0,
+    rgba(255, 255, 255, 0.02) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  opacity: 0.15;
+  z-index: 1000;
+}
+
+/* ============================================
+   Screens System
+   ============================================ */
+
+.screen {
+  display: none;
+  min-height: 100vh;
+}
+
+.screen.active {
+  display: block;
+}
+
+/* ============================================
+   Menu Screen
+   ============================================ */
+
+.menu-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  background: radial-gradient(
+    ellipse at center,
+    #1a2a1a 0%,
+    var(--bg-dark) 70%
+  );
+}
+
+.game-title {
+  font-family: "Orbitron", sans-serif;
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--gold);
+  text-shadow:
+    0 0 40px rgba(255, 215, 0, 0.5),
+    0 4px 0 var(--gold-dark);
+  margin-bottom: 0.5rem;
+  letter-spacing: 8px;
+}
+
+.game-title .accent {
+  color: var(--text);
+}
+
+.subtitle {
+  font-size: 1.3rem;
+  color: var(--gold);
+  margin-bottom: 3rem;
+  letter-spacing: 4px;
+}
+
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 280px;
+  margin-bottom: 3rem;
+}
+
+/* Buttons */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: var(--bg-dark);
+  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(255, 215, 0, 0.5);
+}
+
+.btn-secondary {
+  background: rgba(255, 215, 0, 0.1);
+  color: var(--gold);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 215, 0, 0.2);
+  border-color: var(--gold);
+}
+
+/* Stats Display */
+.stats-display {
+  display: flex;
+  gap: 2rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 1.5rem 3rem;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 215, 0, 0.1),
+    rgba(255, 215, 0, 0.05)
+  );
+  border: 2px solid var(--gold);
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+}
+
+.stat-item .label {
+  font-size: 0.85rem;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.stat-item .value {
+  font-family: "Orbitron", sans-serif;
+  font-size: 2.5rem;
+  color: var(--gold);
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+/* ============================================
+   How to Play Screen
+   ============================================ */
+
+.panel-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: radial-gradient(
+    ellipse at center,
+    #1a2a1a 0%,
+    var(--bg-dark) 70%
+  );
+}
+
+.panel-title {
+  font-family: "Orbitron", sans-serif;
+  font-size: 2.5rem;
+  color: var(--gold);
+  margin-bottom: 2rem;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+.howto-content {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.howto-section {
+  background: rgba(255, 215, 0, 0.05);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.howto-section h3 {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.1rem;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+
+.howto-section p,
+.howto-section ul {
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.howto-section ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.howto-section li {
+  padding: 0.25rem 0;
+}
+
+/* ============================================
+   Game Screen Header
+   ============================================ */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.6), transparent);
+}
+
+.btn-menu {
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  color: var(--gold);
+  font-size: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-menu:hover {
+  background: rgba(255, 215, 0, 0.2);
+}
+
+.logo {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.5rem;
+  color: var(--gold);
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.header-balance {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.balance-label {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.balance-value {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.3rem;
+  color: var(--gold);
+}
+
+/* ============================================
+   Game Area
+   ============================================ */
+
+.game-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 2rem 2rem;
+  gap: 1.5rem;
+}
+
+/* ============================================
+   Roulette Wheel
+   ============================================ */
+
+.wheel-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.wheel-container {
+  position: relative;
+  width: 220px;
+  height: 220px;
+}
+
+.wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(
+    #16a34a 0deg 9.73deg,
+    #dc2626 9.73deg 19.46deg,
+    #1a1a2e 19.46deg 29.19deg,
+    #dc2626 29.19deg 38.92deg,
+    #1a1a2e 38.92deg 48.65deg,
+    #dc2626 48.65deg 58.38deg,
+    #1a1a2e 58.38deg 68.11deg,
+    #dc2626 68.11deg 77.84deg,
+    #1a1a2e 77.84deg 87.57deg,
+    #dc2626 87.57deg 97.3deg,
+    #1a1a2e 97.3deg 107.03deg,
+    #dc2626 107.03deg 116.76deg,
+    #1a1a2e 116.76deg 126.49deg,
+    #dc2626 126.49deg 136.22deg,
+    #1a1a2e 136.22deg 145.95deg,
+    #dc2626 145.95deg 155.68deg,
+    #1a1a2e 155.68deg 165.41deg,
+    #dc2626 165.41deg 175.14deg,
+    #1a1a2e 175.14deg 184.87deg,
+    #dc2626 184.87deg 194.59deg,
+    #1a1a2e 194.59deg 204.32deg,
+    #dc2626 204.32deg 214.05deg,
+    #1a1a2e 214.05deg 223.78deg,
+    #dc2626 223.78deg 233.51deg,
+    #1a1a2e 233.51deg 243.24deg,
+    #dc2626 243.24deg 252.97deg,
+    #1a1a2e 252.97deg 262.7deg,
+    #dc2626 262.7deg 272.43deg,
+    #1a1a2e 272.43deg 282.16deg,
+    #dc2626 282.16deg 291.89deg,
+    #1a1a2e 291.89deg 301.62deg,
+    #dc2626 301.62deg 311.35deg,
+    #1a1a2e 311.35deg 321.08deg,
+    #dc2626 321.08deg 330.81deg,
+    #1a1a2e 330.81deg 340.54deg,
+    #dc2626 340.54deg 350.27deg,
+    #1a1a2e 350.27deg 360deg
+  );
+  border: 8px solid var(--gold);
+  box-shadow:
+    0 0 40px rgba(255, 215, 0, 0.3),
+    inset 0 0 40px rgba(0, 0, 0, 0.5);
+  transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+}
+
+.wheel-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #2a2a3e, #1a1a2e);
+  border: 4px solid var(--gold);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.wheel-marker {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  color: var(--gold);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+  z-index: 10;
+}
+
+.ball-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.ball {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #fff, #ccc);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.5),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.ball.visible {
+  opacity: 1;
+}
+
+/* ============================================
+   Result Display
+   ============================================ */
+
+.result-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid var(--gold);
+  border-radius: 12px;
+  animation: pulse 0.5s ease;
+}
+
+.result-display.hidden {
+  display: none;
+}
+
+.result-number {
+  font-family: "Orbitron", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  min-width: 80px;
+  text-align: center;
+}
+
+.result-number.red {
+  background: var(--red);
+  color: white;
+}
+
+.result-number.black {
+  background: var(--black);
+  color: white;
+  border: 2px solid #444;
+}
+
+.result-number.green {
+  background: var(--green);
+  color: white;
+}
+
+.result-text {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.2rem;
+  color: var(--gold);
+}
+
+.result-text.win {
+  color: var(--success);
+}
+
+.result-text.lose {
+  color: var(--danger);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* ============================================
+   Betting Table
+   ============================================ */
+
+.betting-table {
+  width: 100%;
+  max-width: 700px;
+  background: var(--bg-table);
+  border: 4px solid var(--gold);
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow:
+    0 0 40px rgba(255, 215, 0, 0.2),
+    inset 0 0 60px rgba(0, 0, 0, 0.3);
+}
+
+.bet-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+.current-bet {
+  display: flex;
+  flex-direction: column;
+}
+
+.bet-label {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.bet-value {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.5rem;
+  color: var(--gold);
+}
+
+.chip-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chip-label {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.chip-select {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid #444;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.chip-select[data-value="10"] {
+  background: linear-gradient(145deg, #fff, #ddd);
+  color: #333;
+}
+
+.chip-select[data-value="25"] {
+  background: linear-gradient(145deg, #22c55e, #16a34a);
+  color: white;
+}
+
+.chip-select[data-value="50"] {
+  background: linear-gradient(145deg, #3b82f6, #2563eb);
+  color: white;
+}
+
+.chip-select[data-value="100"] {
+  background: linear-gradient(145deg, #1a1a2e, #0a0a1e);
+  color: white;
+}
+
+.chip-select.active {
+  border-color: var(--gold);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+  transform: scale(1.1);
+}
+
+/* Number Grid */
+.number-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.zero-cell {
+  background: var(--green) !important;
+  color: white;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding: 0.75rem;
+  text-align: center;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 2px;
+}
+
+.numbers-main {
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+  gap: 2px;
+}
+
+.bet-cell {
+  padding: 0.6rem 0.3rem;
+  text-align: center;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.bet-cell.red {
+  background: var(--red);
+  color: white;
+}
+
+.bet-cell.black {
+  background: var(--black);
+  color: white;
+  border: 1px solid #333;
+}
+
+.bet-cell.row-bet {
+  background: rgba(255, 215, 0, 0.2);
+  color: var(--gold);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+}
+
+.bet-cell:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+  z-index: 5;
+}
+
+.bet-cell.selected {
+  box-shadow:
+    0 0 0 3px var(--gold),
+    0 0 20px rgba(255, 215, 0, 0.6);
+}
+
+.bet-cell .chip-marker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--bg-dark);
+  font-size: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Dozen Row */
+.dozen-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 2px;
+}
+
+.dozen-bet {
+  background: rgba(255, 215, 0, 0.15);
+  color: var(--gold);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  padding: 0.5rem;
+}
+
+/* Outside Row */
+.outside-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2px;
+  margin-top: 2px;
+}
+
+.outside-bet {
+  background: rgba(255, 215, 0, 0.1);
+  color: var(--gold);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  padding: 0.6rem;
+  font-size: 0.75rem;
+}
+
+.red-bet {
+  background: rgba(220, 38, 38, 0.3);
+  border-color: var(--red);
+}
+
+.black-bet {
+  background: rgba(26, 26, 46, 0.5);
+  border-color: #444;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: center;
+}
+
+.btn-clear {
+  background: rgba(239, 68, 68, 0.2);
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  padding: 0.75rem 1.5rem;
+}
+
+.btn-clear:hover {
+  background: rgba(239, 68, 68, 0.3);
+}
+
+.btn-spin {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: var(--bg-dark);
+  padding: 0.75rem 3rem;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+}
+
+.btn-spin:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(255, 215, 0, 0.5);
+}
+
+.btn-spin:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 768px) {
+  .game-title {
+    font-size: 2.5rem;
+    letter-spacing: 4px;
+  }
+
+  .wheel-container {
+    width: 180px;
+    height: 180px;
+  }
+
+  .bet-cell {
+    padding: 0.4rem 0.2rem;
+    font-size: 0.7rem;
+  }
+
+  .chip-select {
+    width: 32px;
+    height: 32px;
+    font-size: 0.6rem;
+  }
+
+  .betting-table {
+    padding: 0.5rem;
+  }
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes spinWheel {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(var(--spin-degrees));
+  }
+}
+
+.wheel.spinning {
+  animation: none;
+}

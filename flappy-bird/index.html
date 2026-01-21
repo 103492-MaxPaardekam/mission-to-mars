@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flappy Bird - Mission to Mars</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="scanlines"></div>
+
+    <!-- Menu Screen -->
+    <div id="screen-menu" class="screen active">
+      <div class="menu-container">
+        <h1 class="game-title">FLAPPY<span class="accent">BIRD</span></h1>
+        <p class="subtitle">Vlieg door de ruimte obstakels</p>
+
+        <div class="menu-buttons">
+          <button class="btn btn-primary" id="btn-start">
+            <svg
+              class="btn-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polygon points="5,3 19,12 5,21" />
+            </svg>
+            Start Game
+          </button>
+          <button class="btn btn-secondary" id="btn-howto">
+            <svg
+              class="btn-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+            Hoe te Spelen
+          </button>
+          <button class="btn btn-secondary" id="btn-back-games">
+            <svg
+              class="btn-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+            Terug naar Games
+          </button>
+        </div>
+
+        <div class="best-score-display">
+          <span class="label">Highscore</span>
+          <span class="value" id="menu-best-score">0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- How to Play Screen -->
+    <div id="screen-howto" class="screen">
+      <div class="panel-container">
+        <h2 class="panel-title">Hoe te Spelen</h2>
+
+        <div class="howto-content">
+          <div class="howto-section">
+            <h3>🎯 Doel</h3>
+            <p>
+              Vlieg met je ruimteschip door de openingen tussen de obstakels.
+              Elke obstakel die je passeert geeft je een punt!
+            </p>
+          </div>
+
+          <div class="howto-section">
+            <h3>🎮 Besturing</h3>
+            <p>
+              <strong>Spatie / W</strong> — Flap (omhoog vliegen)<br />
+              <strong>Klik / Tap</strong> — Flap (omhoog vliegen)<br />
+              <strong>Escape</strong> — Pauzeer het spel
+            </p>
+          </div>
+
+          <div class="howto-section">
+            <h3>⚡ Tips</h3>
+            <ul>
+              <li>Tap <strong>regelmatig</strong> voor een stabiele vlucht</li>
+              <li>
+                Anticipeer op de <strong>opening</strong> in de volgende
+                obstakel
+              </li>
+              <li>
+                Het spel wordt <strong>sneller</strong> naarmate je score stijgt
+              </li>
+              <li>Raak de boven- of onderkant niet aan!</li>
+            </ul>
+          </div>
+
+          <div class="howto-section">
+            <h3>📊 Scoring</h3>
+            <p>
+              <strong>+1 punt</strong> — Voor elke gepasseerde obstakel<br />
+              Je highscore wordt automatisch opgeslagen!
+            </p>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" id="btn-howto-back">Terug</button>
+      </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="screen-game" class="screen">
+      <header class="header">
+        <h1 class="logo">FLAPPY BIRD</h1>
+        <button class="boot-button" id="btn-pause">Pauze</button>
+      </header>
+
+      <main class="content-wrapper">
+        <div id="stats">
+          <div class="stat-box">
+            <span class="stat-label">Score</span>
+            <span id="score" class="stat-value">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Highscore</span>
+            <span id="high_score" class="stat-value">0</span>
+          </div>
+        </div>
+
+        <div class="game-wrapper">
+          <div id="game">
+            <div id="pipes"></div>
+          </div>
+        </div>
+
+        <p class="game-hint">Druk op SPATIE, W of KLIK om te vliegen</p>
+      </main>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div id="overlay-pause" class="overlay">
+      <div class="overlay-content">
+        <h2 class="overlay-title">GEPAUZEERD</h2>
+        <div class="overlay-buttons">
+          <button class="btn btn-primary" id="btn-resume">Doorgaan</button>
+          <button class="btn btn-secondary" id="btn-restart">Opnieuw</button>
+          <button class="btn btn-secondary" id="btn-quit">Stoppen</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Overlay -->
+    <div id="overlay-gameover" class="overlay">
+      <div class="overlay-content">
+        <h2 class="overlay-title gameover">GAME OVER</h2>
+        <div class="final-score">
+          <span class="label">Finale Score</span>
+          <span class="value" id="final-score">0</span>
+        </div>
+        <div id="new-highscore" class="new-highscore hidden">
+          🏆 Nieuwe Highscore!
+        </div>
+        <div class="overlay-buttons">
+          <button class="btn btn-primary" id="btn-play-again">
+            Opnieuw Spelen
+          </button>
+          <button class="btn btn-secondary" id="btn-to-menu">Naar Menu</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="game.js"></script>
+  </body>
+</html>
