@@ -62,7 +62,9 @@ body {
   border-radius: 6px;
   cursor: pointer;
   transition: 0.25s;
-  box-shadow: 0 0 8px #33afff inset, 0 0 12px #33afff;
+  box-shadow:
+    0 0 8px #33afff inset,
+    0 0 12px #33afff;
   backdrop-filter: blur(5px);
 }
 
@@ -140,9 +142,16 @@ body {
   text-shadow: 0 0 10px #33afff;
 }
 
+.side-panel ul {
+  list-style: none;
+  padding-left: 0;
+  text-align: left;
+}
+
 .side-panel li {
   position: relative;
   padding-left: 22px;
+  text-align: left;
 }
 
 .side-panel li::before {
@@ -157,18 +166,12 @@ body {
   top: 5px;
 }
 
-.side-panel li.normal::before {
-  background: #33afff;
+.side-panel li.warning {
+  color: #ffcc00;
 }
 
-.side-panel li.warning::before {
-  background: #ffcc00;
-  box-shadow: 0 0 8px #ffcc00;
-}
-
-.side-panel li.error::before {
-  background: #ff3b3b;
-  box-shadow: 0 0 8px #ff3b3b;
+.side-panel li.error {
+  color: #ff3b3b;
 }
 
 @keyframes flicker {

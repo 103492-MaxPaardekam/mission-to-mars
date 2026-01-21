@@ -1,0 +1,352 @@
+/* ============================================
+   AstroTech - Games Selection Page
+   ============================================ */
+
+:root {
+  --bg-dark: #0a0f1a;
+  --bg-card: #111827;
+  --primary: #33afff;
+  --secondary: #6b4cff;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --text: #f2f2f2;
+  --text-dim: #9ca3af;
+  --border: rgba(51, 175, 255, 0.2);
+  --glow: rgba(51, 175, 255, 0.4);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background: var(--bg-dark);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Scanlines overlay */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1) 0px,
+    rgba(0, 0, 0, 0.1) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  z-index: 1000;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  background: linear-gradient(180deg, rgba(10, 15, 26, 0.95), transparent);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.5rem;
+  color: var(--primary);
+  text-shadow: 0 0 20px var(--glow);
+  letter-spacing: 3px;
+}
+
+.boot-button {
+  font-family: "Orbitron", sans-serif;
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  padding: 0.6rem 1.2rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.boot-button:hover {
+  background: var(--primary);
+  color: var(--bg-dark);
+  box-shadow: 0 0 20px var(--glow);
+}
+
+/* Content */
+.content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 3rem 4rem;
+}
+
+.page-title {
+  font-family: "Orbitron", sans-serif;
+  font-size: 2.5rem;
+  text-align: center;
+  color: var(--primary);
+  text-shadow: 0 0 30px var(--glow);
+  margin-bottom: 0.5rem;
+  letter-spacing: 4px;
+}
+
+.page-subtitle {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 1.1rem;
+  margin-bottom: 3rem;
+}
+
+/* Games Grid */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+/* Game Card */
+.game-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1.25rem;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.game-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.game-card:not(.disabled):hover {
+  border-color: var(--primary);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 40px rgba(51, 175, 255, 0.2);
+}
+
+.game-card:not(.disabled):hover::before {
+  opacity: 1;
+}
+
+.game-card.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Game Icon */
+.game-icon {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  background: rgba(51, 175, 255, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+}
+
+.game-icon svg {
+  width: 60px;
+  height: 60px;
+}
+
+/* Game Info */
+.game-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.game-title {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.25rem;
+  color: var(--text);
+  letter-spacing: 1px;
+}
+
+.game-card:not(.disabled):hover .game-title {
+  color: var(--primary);
+}
+
+.game-desc {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
+.game-meta {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.game-tag {
+  background: rgba(107, 76, 255, 0.2);
+  color: var(--secondary);
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.game-status {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.game-status.available {
+  color: var(--success);
+}
+
+.game-status.coming-soon {
+  color: var(--warning);
+}
+
+/* Coming Soon Overlay */
+.coming-soon-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 15, 26, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.coming-soon-overlay span {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.25rem;
+  color: var(--warning);
+  text-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+  letter-spacing: 3px;
+  transform: rotate(-5deg);
+}
+
+.game-card.disabled:hover .coming-soon-overlay {
+  opacity: 1;
+}
+
+/* Info Panel */
+.games-info-panel {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.info-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.info-label {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.info-value {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.5rem;
+  color: var(--primary);
+  text-shadow: 0 0 10px var(--glow);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem 1.5rem;
+  }
+
+  .logo {
+    font-size: 1.1rem;
+  }
+
+  .content-wrapper {
+    padding: 1.5rem;
+  }
+
+  .page-title {
+    font-size: 1.75rem;
+  }
+
+  .games-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .game-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .game-meta {
+    justify-content: center;
+  }
+
+  .games-info-panel {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+/* Animations */
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px var(--glow);
+  }
+  50% {
+    box-shadow: 0 0 40px var(--glow);
+  }
+}
+
+.game-card:not(.disabled):hover .game-icon {
+  animation: pulse-glow 2s ease-in-out infinite;
+}

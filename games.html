@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Games - Mission to Mars</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/games.css" />
+  </head>
+  <body>
+    <div class="scanlines"></div>
+
+    <header class="header">
+      <h1 class="logo">MISSION TO MARS</h1>
+      <button onclick="window.location.href = 'index.html'" class="boot-button">
+        Terug naar Home
+      </button>
+    </header>
+
+    <main class="content-wrapper">
+      <h2 class="page-title">GAME CENTER</h2>
+      <p class="page-subtitle">Selecteer een game om te spelen</p>
+
+      <div class="games-grid">
+        <!-- Tetris -->
+        <a href="game.html" class="game-card">
+          <div class="game-icon">
+            <svg viewBox="0 0 100 100" class="tetris-icon">
+              <rect x="10" y="10" width="25" height="25" fill="#33AFFF" />
+              <rect x="35" y="10" width="25" height="25" fill="#33AFFF" />
+              <rect x="35" y="35" width="25" height="25" fill="#33AFFF" />
+              <rect x="35" y="60" width="25" height="25" fill="#33AFFF" />
+              <rect x="60" y="35" width="25" height="25" fill="#6B4CFF" />
+              <rect x="60" y="60" width="25" height="25" fill="#6B4CFF" />
+              <rect x="10" y="60" width="25" height="25" fill="#10B981" />
+              <rect x="10" y="35" width="25" height="25" fill="#10B981" />
+            </svg>
+          </div>
+          <div class="game-info">
+            <h3 class="game-title">Tetris</h3>
+            <p class="game-desc">
+              Klassieke puzzel actie - stapel blokken en maak rijen
+            </p>
+            <div class="game-meta">
+              <span class="game-tag">Puzzel</span>
+              <span class="game-status available">Beschikbaar</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Tower Run -->
+        <a href="tower-run/index.html" class="game-card">
+          <div class="game-icon">
+            <svg viewBox="0 0 100 100" class="tower-icon">
+              <rect x="35" y="75" width="30" height="15" fill="#33AFFF" />
+              <rect x="30" y="55" width="40" height="15" fill="#6B4CFF" />
+              <rect x="25" y="35" width="50" height="15" fill="#33AFFF" />
+              <rect x="20" y="15" width="60" height="15" fill="#6B4CFF" />
+              <polygon points="50,0 70,15 30,15" fill="#10B981" />
+              <rect x="45" y="80" width="10" height="10" fill="#0A0F1A" />
+            </svg>
+          </div>
+          <div class="game-info">
+            <h3 class="game-title">Tower Run</h3>
+            <p class="game-desc">
+              Beklim de toren - 8 verdiepingen van skill-based uitdagingen
+            </p>
+            <div class="game-meta">
+              <span class="game-tag">Actie</span>
+              <span class="game-status available">Beschikbaar</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Flappy Bird - Coming Soon -->
+        <div class="game-card disabled">
+          <div class="game-icon">
+            <svg viewBox="0 0 100 100" class="bird-icon">
+              <ellipse cx="45" cy="50" rx="30" ry="25" fill="#F59E0B" />
+              <circle cx="55" cy="45" r="8" fill="#fff" />
+              <circle cx="58" cy="45" r="4" fill="#0A0F1A" />
+              <polygon points="75,50 90,45 90,55" fill="#EF4444" />
+              <ellipse cx="35" cy="55" rx="15" ry="8" fill="#D97706" />
+            </svg>
+          </div>
+          <div class="game-info">
+            <h3 class="game-title">Flappy Bird</h3>
+            <p class="game-desc">
+              Vlieg door obstakels - test je reflexen in de ruimte
+            </p>
+            <div class="game-meta">
+              <span class="game-tag">Arcade</span>
+              <span class="game-status coming-soon">Binnenkort</span>
+            </div>
+          </div>
+          <div class="coming-soon-overlay">
+            <span>COMING SOON</span>
+          </div>
+        </div>
+
+        <!-- Snake - Coming Soon -->
+        <div class="game-card disabled">
+          <div class="game-icon">
+            <svg viewBox="0 0 100 100" class="snake-icon">
+              <path
+                d="M20,50 Q20,30 40,30 Q60,30 60,50 Q60,70 80,70"
+                stroke="#10B981"
+                stroke-width="12"
+                fill="none"
+                stroke-linecap="round"
+              />
+              <circle cx="85" cy="70" r="10" fill="#10B981" />
+              <circle cx="82" cy="67" r="3" fill="#0A0F1A" />
+              <circle cx="88" cy="67" r="3" fill="#0A0F1A" />
+              <rect x="15" y="60" width="8" height="8" fill="#EF4444" />
+            </svg>
+          </div>
+          <div class="game-info">
+            <h3 class="game-title">Snake</h3>
+            <p class="game-desc">
+              Retro klassiek - groei en overleef in de leegte
+            </p>
+            <div class="game-meta">
+              <span class="game-tag">Arcade</span>
+              <span class="game-status coming-soon">Binnenkort</span>
+            </div>
+          </div>
+          <div class="coming-soon-overlay">
+            <span>COMING SOON</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="games-info-panel">
+        <div class="info-stat">
+          <span class="info-label">Beschikbare Games</span>
+          <span class="info-value">2</span>
+        </div>
+        <div class="info-stat">
+          <span class="info-label">Binnenkort</span>
+          <span class="info-value">2</span>
+        </div>
+        <div class="info-stat">
+          <span class="info-label">Highscore Systeem</span>
+          <span class="info-value">Actief</span>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

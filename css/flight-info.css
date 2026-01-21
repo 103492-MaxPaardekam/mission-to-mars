@@ -62,7 +62,9 @@ body {
   border-radius: 6px;
   cursor: pointer;
   transition: 0.25s;
-  box-shadow: 0 0 8px #33afff inset, 0 0 12px #33afff;
+  box-shadow:
+    0 0 8px #33afff inset,
+    0 0 12px #33afff;
 }
 
 .nav-button:hover {
@@ -150,17 +152,19 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  grid-column: span 3;
 }
 
 .status-module ul {
   list-style: none;
   padding: 0;
-  margin-top: 10px;
-  align-items: center;
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px 40px;
   justify-content: center;
 }
 .status-module li {
-  margin-bottom: 10px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -185,7 +189,8 @@ body {
 .map-grid {
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(
+  background:
+    repeating-linear-gradient(
       to bottom,
       rgba(51, 175, 255, 0.1) 0px,
       rgba(51, 175, 255, 0.1) 1px,

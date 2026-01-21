@@ -259,7 +259,7 @@ function activateHolodeck(programId) {
     } else {
       clearInterval(loadingInterval);
       alert(
-        `🌐 HOLODECK GEACTIVEERD\n\n${program.title}\n\nJe kunt nu naar Holodeck Kamer 1 gaan.\n\nHet programma is geladen en wacht op je!\n\n⚠️ Vergeet niet de veiligheidsprotocollen te lezen voordat je begint.`
+        `🌐 HOLODECK GEACTIVEERD\n\n${program.title}\n\nJe kunt nu naar Holodeck Kamer 1 gaan.\n\nHet programma is geladen en wacht op je!\n\n⚠️ Vergeet niet de veiligheidsprotocollen te lezen voordat je begint.`,
       );
 
       // Reset status after 3 seconds

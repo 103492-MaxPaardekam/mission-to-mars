@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu / Eten - Mission to Mars</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link href="css/menu.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="scanlines"></div>
+
+    <header class="header">
+      <h1 class="logo">MISSION TO MARS</h1>
+      <button onclick="window.location.href = 'index.html'" class="boot-button">
+        Terug naar Home
+      </button>
+    </header>
+
+    <main class="content-wrapper">
+      <!-- Decorative background elements -->
+      <div class="space-bg">
+        <div class="planet"></div>
+        <div class="stars"></div>
+      </div>
+
+      <div class="top-bar">
+        <h2 class="page-title">MENU</h2>
+        <div class="daily-special">
+          <span class="special-label">🌟 DAILY SPECIAL</span>
+          <span class="special-item">Truffle Special Pizza - <span class="special-price">15.00</span> <s>19.00</s></span>
+        </div>
+        <div class="cart-summary">
+          <span class="cart-count" id="cartCount">0</span>
+          <span class="cart-total" id="cartTotal">0.00 credits</span>
+        </div>
+          </div>
+
+          <div class="category-tabs">
+            <button class="tab-btn active" data-category="pizza">🍕 Pizza</button>
+            <button class="tab-btn" data-category="vlees">🥩 Vlees</button>
+            <button class="tab-btn" data-category="pasta">🍝 Pasta</button>
+            <button class="tab-btn" data-category="soep">🥣 Soep</button>
+            <button class="tab-btn" data-category="vega">🥬 Vega</button>
+            <button class="tab-btn" data-category="drinken">🍹 Drinken</button>
+            <button class="tab-btn" data-category="dessert">🍰 Dessert</button>
+          </div>
+
+          <div class="menu-display">
+        <div class="menu-category active" id="pizza">
+          <div class="menu-grid">
+            <div class="menu-item" data-price="12.50" data-name="Margherita">
+              <span class="badge badge-popular">⭐</span>
+              <div class="item-info">
+                <span class="item-name">Margherita</span>
+                <span class="item-desc">Tomaat, mozzarella, basilicum</span>
+              </div>
+              <span class="price">12.50</span>
+            </div>
+            <div class="menu-item" data-price="14.00" data-name="Pepperoni">
+              <span class="badge badge-spicy">🌶️</span>
+              <div class="item-info">
+                <span class="item-name">Pepperoni</span>
+                <span class="item-desc">Pikante salami, mozzarella</span>
+              </div>
+              <span class="price">14.00</span>
+            </div>
+            <div
+              class="menu-item"
+              data-price="15.50"
+              data-name="Quattro Formaggi"
+            >
+              <div class="item-info">
+                <span class="item-name">Quattro Formaggi</span
+                ><span class="item-desc">Vier soorten Italiaanse kaas</span>
+              </div>
+              <span class="price">15.50</span>
+            </div>
+            <div class="menu-item" data-price="14.50" data-name="Hawaii">
+              <div class="item-info">
+                <span class="item-name">Hawaii</span
+                ><span class="item-desc">Ham, ananas, mozzarella</span>
+              </div>
+              <span class="price">14.50</span>
+            </div>
+            <div class="menu-item" data-price="13.50" data-name="Funghi">
+              <span class="badge badge-vegan">🌱</span>
+              <div class="item-info">
+                <span class="item-name">Funghi</span>
+                <span class="item-desc">Verse champignons, knoflook</span>
+              </div>
+              <span class="price">13.50</span>
+            </div>
+            <div class="menu-item" data-price="16.00" data-name="Capricciosa">
+              <div class="item-info">
+                <span class="item-name">Capricciosa</span
+                ><span class="item-desc">Ham, champignons, artisjokken</span>
+              </div>
+              <span class="price">16.00</span>
+            </div>
+            <div class="menu-item" data-price="15.00" data-name="Diavola">
+              <span class="badge badge-spicy">🌶️</span>
+              <div class="item-info">
+                <span class="item-name">Diavola</span>
+                <span class="item-desc">Pikante salami, chilipeper</span>
+              </div>
+              <span class="price">15.00</span>
+            </div>
+            <div class="menu-item" data-price="17.50" data-name="Calzone">
+              <div class="item-info">
+                <span class="item-name">Calzone</span
+                ><span class="item-desc">Gevouwen, ham, ricotta</span>
+              </div>
+              <span class="price">17.50</span>
+            </div>
+            <div class="menu-item" data-price="16.50" data-name="Tonno">
+              <div class="item-info">
+                <span class="item-name">Tonno</span
+                ><span class="item-desc">Tonijn, ui, olijven</span>
+              </div>
+              <span class="price">16.50</span>
+            </div>
+            <div class="menu-item" data-price="18.00" data-name="Prosciutto">
+              <div class="item-info">
+                <span class="item-name">Prosciutto</span
+                ><span class="item-desc">Parmaham, rucola, parmezaan</span>
+              </div>
+              <span class="price">18.00</span>
+            </div>
+            <div class="menu-item" data-price="14.00" data-name="Marinara">
+              <span class="badge badge-vegan">🌱</span>
+              <div class="item-info">
+                <span class="item-name">Marinara</span>
+                <span class="item-desc">Tomaat, knoflook, oregano</span>
+              </div>
+              <span class="price">14.00</span>
+            </div>
+            <div class="menu-item" data-price="19.00" data-name="Truffle Special">
+              <span class="badge badge-popular">⭐</span>
+              <div class="item-info">
+                <span class="item-name">Truffle Special</span>
+                <span class="item-desc">Truffelolie, paddenstoelen</span>
+              </div>
+              <span class="price">19.00</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-category" id="vlees">
+          <div class="menu-grid">
+            <div class="menu-item" data-price="24.50" data-name="Steak">
+              <span class="badge badge-popular">⭐</span>
+              <div class="item-info">
+                <span class="item-name">Steak</span>
+                <span class="item-desc">Black Angus, medium rare</span>
+              </div>
+              <span class="price">24.50</span>
+            </div>
+            <div class="menu-item" data-price="18.00" data-name="Stoofvlees">
+              <div class="item-info">
+                <span class="item-name">Stoofvlees</span
+                ><span class="item-desc">Belgisch recept, frietjes</span>
+              </div>
+              <span class="price">18.00</span>
+            </div>
+            <div class="menu-item" data-price="19.50" data-name="Spareribs">
+              <div class="item-info">
+                <span class="item-name">Spareribs</span
+                ><span class="item-desc">BBQ saus, coleslaw</span>
+              </div>
+              <span class="price">19.50</span>
+            </div>
+            <div class="menu-item" data-price="22.00" data-name="Beef Tartare">
+              <div class="item-info">
+                <span class="item-name">Beef Tartare</span
+                ><span class="item-desc">Verse rundertartaar, toast</span>
+              </div>
+              <span class="price">22.00</span>
+            </div>
+            <div
+              class="menu-item"
+              data-price="26.00"
+              data-name="Lamskoteletten"
+            >
+              <div class="item-info">
+                <span class="item-name">Lamskoteletten</span
+                ><span class="item-desc">Rozemarijn, knoflook</span>
+              </div>
+              <span class="price">26.00</span>
+            </div>
+            <div class="menu-item" data-price="23.50" data-name="Osso Buco">
+              <div class="item-info">
+                <span class="item-name">Osso Buco</span
+                ><span class="item-desc">Kalfsschenkel, risotto</span>
+              </div>
+              <span class="price">23.50</span>
+            </div>
+            <div class="menu-item" data-price="21.00" data-name="Kip Satay">
+              <span class="badge badge-nuts">🥜</span>
+              <div class="item-info">
+                <span class="item-name">Kip Satay</span>
+                <span class="item-desc">Pindasaus, atjar</span>
+              </div>
+              <span class="price">21.00</span>
+            </div>
+            <div class="menu-item" data-price="25.00" data-name="Ribeye">
+              <span class="badge badge-popular">⭐</span>
+              <div class="item-info">
+                <span class="item-name">Ribeye</span>
+                <span class="item-desc">300g, pepersaus</span>
+              </div>
+              <span class="price">25.00</span>
+            </div>
+            <div class="menu-item" data-price="20.00" data-name="Pulled Pork">
+              <div class="item-info">
+                <span class="item-name">Pulled Pork</span
+                ><span class="item-desc">Langzaam gegaard, BBQ</span>
+              </div>
+              <span class="price">20.00</span>
+            </div>
+            <div class="menu-item" data-price="17.50" data-name="Gehaktbal">
+              <div class="item-info">
+                <span class="item-name">Gehaktbal</span
+                ><span class="item-desc">Huisgemaakt, jus</span>
+              </div>
+              <span class="price">17.50</span>
+            </div>
+            <div class="menu-item" data-price="28.00" data-name="T-Bone">
+              <div class="item-info">
+                <span class="item-name">T-Bone</span
+                ><span class="item-desc">500g, kruidenboter</span>
+              </div>
+              <span class="price">28.00</span>
+            </div>
+            <div class="menu-item" data-price="16.50" data-name="Schnitzel">
+              <div class="item-info">
+                <span class="item-name">Schnitzel</span
+                ><span class="item-desc">Gepaneerd, citroen</span>
+              </div>
+              <span class="price">16.50</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-category" id="pasta">
+          <div class="menu-grid">
+            <div class="menu-item" data-price="14.00" data-name="Bolognese">
+              <div class="item-info">
+                <span class="item-name">Bolognese</span
+                ><span class="item-desc">Klassieke vleessaus</span>
+              </div>
+              <span class="price">14.00</span>
+            </div>
+            <div class="menu-item" data-price="15.50" data-name="Carbonara">
+              <span class="badge badge-popular">⭐</span>
+              <div class="item-info">
+                <span class="item-name">Carbonara</span>
+                <span class="item-desc">Spek, ei, parmezaan</span>
+              </div>
+              <span class="price">15.50</span>
+            </div>
+            <div class="menu-item" data-price="16.00" data-name="Lasagne">
+              <div class="item-info">
+                <span class="item-name">Lasagne</span
+                ><span class="item-desc">Huisgemaakt, 4 lagen</span>
+              </div>
+              <span class="price">16.00</span>
+            </div>
+            <div class="menu-item" data-price="13.50" data-name="Pesto">
+              <span class="badge badge-nuts">🥜</span>
+              <div class="item-info">
+                <span class="item-name">Pesto</span>
+                <span class="item-desc">Verse basilicum, pijnboom</span>
+              </div>
+              <span class="price">13.50</span>
+            </div>
+            <div class="menu-item" data-price="14.50" data-name="Alfredo">
+              <div class="item-info">
+                <span class="item-name">Alfredo</span
+                ><span class="item-desc">Romige kaassaus</span>
+              </div>
+              <span class="price">14.50</span>
+            </div>
+            <div class="menu-item" data-price="13.00" data-name="Arrabbiata">
+              <span class="badge badge-spicy">🌶️</span><span class="badge badge-vegan">🌱</span>
+              <div class="item-info">
+                <span class="item-name">Arrabbiata</span>
+                <span class="item-desc">Pittige tomatensaus</span>
+              </div>
+              <span class="price">13.00</span>
+            </div>
+            <div
+              class="menu-item"
+              data-price="17.00"
+              data-name="Frutti di Mare"
+            >
+              <div class="item-info">
+                <span class="item-name">Frutti di Mare</span
+                ><span class="item-desc">Gemengde zeevruchten</span>
+              </div>
+              <span class="price">17.00</span>
+            </div>
+            <div class="menu-item" data-price="15.00" data-name="Aglio e Olio">
+              <span class="badge badge-vegan">🌱</span>
+              <div class="item-info">
+                <span class="item-name">Aglio e Olio</span>
+                <span class="item-desc">Knoflook, olijfolie, chili</span>
+              </div>
+              <span class="price">15.00</span>
+            </div>
+            <div class="menu-item" data-price="16.50" data-name="Ravioli">
+              <div class="item-info">
+                <span class="item-name">Ravioli</span
+                ><span class="item-desc">Gevuld met ricotta, spinazie</span>
+              </div>
+              <span class="price">16.50</span>
+            </div>
+            <div class="menu-item" data-price="14.00" data-name="Napolitana">
+              <div class="item-info">
+                <span class="item-name">Napolitana</span
+                ><span class="item-desc">Tomatensaus, basilicum</span>
+              </div>
+              <span class="price">14.00</span>
+            </div>
+            <div class="menu-item" data-price="18.00" data-name="Truffle Pasta">
+              <div class="item-info">
+                <span class="item-name">Truffle Pasta</span
+                ><span class="item-desc">Truffelolie, parmezaan</span>
+              </div>
+              <span class="price">18.00</span>
+            </div>
+            <div class="menu-item" data-price="15.50" data-name="Gnocchi">
+              <div class="item-info">
+                <span class="item-name">Gnocchi</span
+                ><span class="item-desc">Aardappel, gorgonzola</span>
+              </div>
+              <span class="price">15.50</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-category" id="soep">
+          <div class="menu-grid">
+            <div class="menu-item" data-price="6.50" data-name="Tomatensoep">
+              <div class="item-info">
+                <span class="item-name">Tomatensoep</span
+                ><span class="item-desc">Verse basilicum, room</span>
+              </div>
+              <span class="price">6.50</span>
+            </div>
+            <div class="menu-item" data-price="7.00" data-name="Kippensoep">
+              <div class="item-info">
+                <span class="item-name">Kippensoep</span
+                ><span class="item-desc">Met vermicelli</span>
+              </div>
+              <span class="price">7.00</span>
+            </div>
+            <div class="menu-item" data-price="7.50" data-name="Erwtensoep">
+              <div class="item-info">
+                <span class="item-name">Erwtensoep</span
+                ><span class="item-desc">Hollandse snert, rookworst</span>
+              </div>
+              <span class="price">7.50</span>
+            </div>
+            <div class="menu-item" data-price="6.50" data-name="Champignonsoep">
+              <div class="item-info">
+                <span class="item-name">Champignonsoep</span
+                ><span class="item-desc">Romig, verse champignons</span>
+              </div>
+              <span class="price">6.50</span>
+            </div>
+            <div class="menu-item" data-price="7.00" data-name="Uiensoep">
+              <div class="item-info">
+                <span class="item-name">Uiensoep</span
+                ><span class="item-desc">Franse stijl, gruyère</span>
+              </div>
+              <span class="price">7.00</span>
+            </div>
+            <div class="menu-item" data-price="6.50" data-name="Pompoensoep">
+              <div class="item-info">
+                <span class="item-name">Pompoensoep</span
+                ><span class="item-desc">Seizoensgebonden, gember</span>
+              </div>
+              <span class="price">6.50</span>
+            </div>
+            <div class="menu-item" data-price="8.00" data-name="Kreeftensoep">
+              <div class="item-info">
+                <span class="item-name">Kreeftensoep</span
+                ><span class="item-desc">Bisque, cognac</span>
+              </div>
+              <span class="price">8.00</span>
+            </div>
+            <div
+              class="menu-item"
+              data-price="6.00"
+              data-name="Groentenbouillon"
+            >
+              <div class="item-info">
+                <span class="item-name">Groentenbouillon</span
+                ><span class="item-desc">Lichte bouillon, groenten</span>
+              </div>
+              <span class="price">6.00</span>
+            </div>
+            <div class="menu-item" data-price="7.50" data-name="Minestrone">
+              <div class="item-info">
+                <span class="item-name">Minestrone</span
+                ><span class="item-desc">Italiaans, pasta, bonen</span>
+              </div>
+              <span class="price">7.50</span>
+            </div>
+            <div class="menu-item" data-price="8.50" data-name="Bouillabaisse">
+              <div class="item-info">
+                <span class="item-name">Bouillabaisse</span
+                ><span class="item-desc">Vissoep uit Marseille</span>
+              </div>
+              <span class="price">8.50</span>
+            </div>
+            <div class="menu-item" data-price="6.00" data-name="Miso Soep">
+              <div class="item-info">
+                <span class="item-name">Miso Soep</span
+                ><span class="item-desc">Tofu, wakame, lente-ui</span>
+              </div>
+              <span class="price">6.00</span>
+            </div>
+            <div class="menu-item" data-price="7.00" data-name="Gazpacho">
+              <div class="item-info">
+                <span class="item-name">Gazpacho</span
+                ><span class="item-desc">Koude Spaanse soep</span>
+              </div>
+              <span class="price">7.00</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-category" id="vega">
+          <div class="menu-grid">
+            <div class="menu-item" data-price="14.50" data-name="Vega Curry">
+              <span class="badge badge-vegan">🌱</span>
+              <div class="item-info">
+                <span class="item-name">Vega Curry</span>
+                <span class="item-desc">Kokosmelk, groenten</span>
+              </div>
+              <span class="price">14.50</span>
+            </div>
+            <div
+              class="menu-item"
+              data-price="15.00"
+              data-name="Groentelasagne"
+            >
+              <div class="item-info">
+                <span class="item-name">Groentelasagne</span
+                ><span class="item-desc">Seizoensgroenten, bechamel</span>
+              </div>
+              <span class="price">15.00</span>
+            </div>
+            <div class="menu-item" data-price="13.50" data-name="Falafel">
+              <span class="badge badge-vegan">🌱</span><span class="badge badge-popular">⭐</span>
+              <div class="item-info">
+                <span class="item-name">Falafel</span>
+                <span class="item-desc">Hummus, pitabrood</span>
+              </div>
+              <span class="price">13.50</span>
+            </div>
+            <div
+              class="menu-item"
+              data-price="16.00"
+              data-name="Risotto Funghi"
+            >
+              <div class="item-info">
+                <span class="item-name">Risotto Funghi</span
+                ><span class="item-desc">Truffelolie, parmezaan</span>
+              </div>
+              <span class="price">16.00</span>
+            </div>
+            <div class="menu-item" data-price="11.00" data-name="Caesar Salade">
+              <div class="item-info">
+                <span class="item-name">Caesar Salade</span
+                ><span class="item-desc">Croutons, parmezaan</span>
+              </div>
+              <span class="price">11.00</span>
+            </div>
+            <div
+              class="menu-item"
+              data-price="14.00"
+              data-name="Gevulde Paprika"
+            >
+              <div class="item-info">
+                <span class="item-name">Gevulde Paprika</span
+                ><span class="item-desc">Quinoa, feta, kruiden</span>
+              </div>
+              <span class="price">14.00</span>
+            </div>
+            <div class="menu-item" data-price="12.50" data-name="Buddha Bowl">
+              <span class="badge badge-vegan">🌱</span>
+              <div class="item-info">
+                <span class="item-name">Buddha Bowl</span>
+                <span class="item-desc">Quinoa, avocado, kikkererwten</span>
+              </div>
+              <span class="price">12.50</span>
+            </div>
+            <div class="menu-item" data-price="15.50" data-name="Vega Burger">
+              <span class="badge badge-vegan">🌱</span><span class="badge badge-popular">⭐</span>
+              <div class="item-info">
+                <span class="item-name">Vega Burger</span>
+                <span class="item-desc">Beyond Meat, brioche</span>
+              </div>
+              <span class="price">15.50</span>
+            </div>
+            <div class="menu-item" data-price="13.00" data-name="Caprese">
+              <div class="item-info">
+                <span class="item-name">Caprese</span
+                ><span class="item-desc">Buffelmozzarella, tomaat</span>
+              </div>
+              <span class="price">13.00</span>
+            </div>
+            <div class="menu-item" data-price="14.50" data-name="Shakshuka">
+              <span class="badge badge-spicy">🌶️</span>
+              <div class="item-info">
+                <span class="item-name">Shakshuka</span>
+                <span class="item-desc">Gepocheerde eieren, tomaat</span>
+              </div>
+              <span class="price">14.50</span>
+            </div>
+            <div class="menu-item" data-price="16.50" data-name="Pad Thai Vega">
+              <span class="badge badge-vegan">🌱</span><span class="badge badge-nuts">🥜</span>
+              <div class="item-info">
+                <span class="item-name">Pad Thai Vega</span>
+                <span class="item-desc">Tofu, pinda's, limoen</span>
+              </div>
+              <span class="price">16.50</span>
+            </div>
+            <div class="menu-item" data-price="12.00" data-name="Hummus Bowl">
+              <span class="badge badge-vegan">🌱</span>
+              <div class="item-info">
+                <span class="item-name">Hummus Bowl</span>
+                <span class="item-desc">Gegrilde groenten, pita</span>
+              </div>
+              <span class="price">12.00</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-category" id="drinken">
+          <div class="menu-grid">
+            <div class="menu-item" data-price="2.50" data-name="Water">
+              <div class="item-info">
+                <span class="item-name">Water</span
+                ><span class="item-desc">Plat of bruisend</span>
+              </div>
+              <span class="price">2.50</span>
+            </div>
+            <div class="menu-item" data-price="3.00" data-name="Koffie">
+              <div class="item-info">
+                <span class="item-name">Koffie</span
+                ><span class="item-desc">Vers gezet, arabica</span>
+              </div>
+              <span class="price">3.00</span>
+            </div>
+            <div class="menu-item" data-price="2.80" data-name="Thee">
+              <div class="item-info">
+                <span class="item-name">Thee</span
+                ><span class="item-desc">Diverse smaken</span>
+              </div>
+              <span class="price">2.80</span>
+            </div>
+            <div class="menu-item" data-price="3.50" data-name="Cola">
+              <div class="item-info">
+                <span class="item-name">Cola</span
+                ><span class="item-desc">Regular of zero</span>
+              </div>
+              <span class="price">3.50</span>
+            </div>
+            <div class="menu-item" data-price="4.00" data-name="Vers Sap">
+              <div class="item-info">
+                <span class="item-name">Vers Sap</span
+                ><span class="item-desc">Sinaasappel of appel</span>
+              </div>
+              <span class="price">4.00</span>
+            </div>
+            <div class="menu-item" data-price="2.50" data-name="Melk">
+              <div class="item-info">
+                <span class="item-name">Melk</span
+                ><span class="item-desc">Vol, halfvol of haver</span>
+              </div>
+              <span class="price">2.50</span>
+            </div>
+            <div class="menu-item" data-price="4.50" data-name="Smoothie">
+              <div class="item-info">
+                <span class="item-name">Smoothie</span
+                ><span class="item-desc">Vers fruit, yoghurt</span>
+              </div>
+              <span class="price">4.50</span>
+            </div>
+            <div class="menu-item" data-price="3.80" data-name="Cappuccino">
+              <div class="item-info">
+                <span class="item-name">Cappuccino</span
+                ><span class="item-desc">Espresso, opgeschuimde melk</span>
+              </div>
+              <span class="price">3.80</span>
+            </div>
+            <div
+              class="menu-item"
+              data-price="4.00"
+              data-name="Latte Macchiato"
+            >
+              <div class="item-info">
+                <span class="item-name">Latte Macchiato</span
+                ><span class="item-desc">Gelaagd, melkschuim</span>
+              </div>
+              <span class="price">4.00</span>
+            </div>
+            <div class="menu-item" data-price="3.50" data-name="IJsthee">
+              <div class="item-info">
+                <span class="item-name">IJsthee</span
+                ><span class="item-desc">Perzik of citroen</span>
+              </div>
+              <span class="price">3.50</span>
+            </div>
+            <div class="menu-item" data-price="5.00" data-name="Milkshake">
+              <div class="item-info">
+                <span class="item-name">Milkshake</span
+                ><span class="item-desc">Vanille, choco of aardbei</span>
+              </div>
+              <span class="price">5.00</span>
+            </div>
+            <div class="menu-item" data-price="3.00" data-name="Fanta">
+              <div class="item-info">
+                <span class="item-name">Fanta</span
+                ><span class="item-desc">Orange of lemon</span>
+              </div>
+              <span class="price">3.00</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-category" id="dessert">
+          <div class="menu-grid">
+            <div class="menu-item" data-price="6.50" data-name="Tiramisu">
+              <span class="badge badge-popular">⭐</span>
+              <div class="item-info">
+                <span class="item-name">Tiramisu</span>
+                <span class="item-desc">Mascarpone, espresso</span>
+              </div>
+              <span class="price">6.50</span>
+            </div>
+            <div class="menu-item" data-price="5.50" data-name="Panna Cotta">
+              <div class="item-info">
+                <span class="item-name">Panna Cotta</span
+                ><span class="item-desc">Vanille, rode vruchten</span>
+              </div>
+              <span class="price">5.50</span>
+            </div>
+            <div class="menu-item" data-price="7.00" data-name="Chocolade Lava">
+              <span class="badge badge-popular">⭐</span>
+              <div class="item-info">
+                <span class="item-name">Chocolade Lava</span>
+                <span class="item-desc">Vloeibare kern, ijs</span>
+              </div>
+              <span class="price">7.00</span>
+            </div>
+            <div class="menu-item" data-price="4.50" data-name="IJs (3 bol)">
+              <div class="item-info">
+                <span class="item-name">IJs (3 bol)</span
+                ><span class="item-desc">Keuze uit 8 smaken</span>
+              </div>
+              <span class="price">4.50</span>
+            </div>
+            <div class="menu-item" data-price="6.00" data-name="Cheesecake">
+              <div class="item-info">
+                <span class="item-name">Cheesecake</span
+                ><span class="item-desc">New York style, framboos</span>
+              </div>
+              <span class="price">6.00</span>
+            </div>
+            <div class="menu-item" data-price="5.00" data-name="Crème Brûlée">
+              <div class="item-info">
+                <span class="item-name">Crème Brûlée</span
+                ><span class="item-desc">Gekaramelliseerd, vanille</span>
+              </div>
+              <span class="price">5.00</span>
+            </div>
+            <div class="menu-item" data-price="7.50" data-name="Brownie Sundae">
+              <span class="badge badge-nuts">🥜</span>
+              <div class="item-info">
+                <span class="item-name">Brownie Sundae</span>
+                <span class="item-desc">Warme brownie, ijs, saus</span>
+              </div>
+              <span class="price">7.50</span>
+            </div>
+            <div class="menu-item" data-price="5.50" data-name="Appeltaart">
+              <div class="item-info">
+                <span class="item-name">Appeltaart</span
+                ><span class="item-desc">Huisgemaakt, slagroom</span>
+              </div>
+              <span class="price">5.50</span>
+            </div>
+            <div class="menu-item" data-price="6.00" data-name="Profiteroles">
+              <div class="item-info">
+                <span class="item-name">Profiteroles</span
+                ><span class="item-desc">Chocoladesaus, room</span>
+              </div>
+              <span class="price">6.00</span>
+            </div>
+            <div class="menu-item" data-price="4.00" data-name="Sorbet">
+              <div class="item-info">
+                <span class="item-name">Sorbet</span
+                ><span class="item-desc">Citroen, mango of passie</span>
+              </div>
+              <span class="price">4.00</span>
+            </div>
+            <div class="menu-item" data-price="8.00" data-name="Dame Blanche">
+              <div class="item-info">
+                <span class="item-name">Dame Blanche</span
+                ><span class="item-desc">Vanille-ijs, warme choco</span>
+              </div>
+              <span class="price">8.00</span>
+            </div>
+            <div class="menu-item" data-price="5.50" data-name="Mousse">
+              <div class="item-info">
+                <span class="item-name">Mousse</span
+                ><span class="item-desc">Pure chocolade, luchtig</span>
+              </div>
+              <span class="price">5.50</span>
+            </div>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info Bar -->
+      <div class="info-bar">
+        <div class="info-section">
+          <h3>🕐 Openingstijden</h3>
+          <ul>
+            <li>Ontbijt: 06:00 - 10:00</li>
+            <li>Lunch: 11:30 - 14:00</li>
+            <li>Diner: 17:00 - 22:00</li>
+            <li>Snacks: 24/7</li>
+          </ul>
+        </div>
+        <div class="info-section">
+          <h3>📍 Locatie</h3>
+          <p>Deck 3, Module B — Mess Hall Alpha</p>
+        </div>
+        <div class="info-section allergen-legend">
+          <h3>Legenda</h3>
+          <ul>
+            <li><span class="badge badge-vegan">🌱</span> Vegan</li>
+            <li><span class="badge badge-spicy">🌶️</span> Pittig</li>
+            <li><span class="badge badge-nuts">🥜</span> Bevat noten</li>
+            <li><span class="badge badge-popular">⭐</span> Populair</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="order-panel">
+        <div class="order-info">
+          <div class="selected-items" id="selectedItems">
+            Selecteer items om te bestellen
+          </div>
+          <button class="order-btn" id="orderBtn">BESTELLEN</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Order confirmation modal -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal">
+        <div class="modal-header">✓ BESTELLING GEPLAATST</div>
+        <div class="modal-body" id="modalBody"></div>
+        <button class="modal-close" id="modalClose">SLUITEN</button>
+      </div>
+    </div>
+
+    <script src="js/menu.js"></script>
+  </body>
+</html>

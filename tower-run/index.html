@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tower Run - AstroTech</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="scanlines"></div>
+
+    <!-- Main Menu Screen -->
+    <div id="screen-menu" class="screen active">
+      <div class="menu-container">
+        <h1 class="game-title">TOWER<span class="accent">RUN</span></h1>
+        <p class="subtitle">Ascend the Spire. Survive the Climb.</p>
+
+        <div class="menu-buttons">
+          <button class="btn btn-primary" id="btn-start">
+            <svg
+              class="btn-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polygon points="5,3 19,12 5,21" />
+            </svg>
+            Start Run
+          </button>
+          <button class="btn btn-secondary" id="btn-howto">
+            <svg
+              class="btn-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+            How to Play
+          </button>
+          <button class="btn btn-secondary" id="btn-settings">
+            <svg
+              class="btn-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+              />
+            </svg>
+            Settings
+          </button>
+        </div>
+
+        <div class="best-score-display">
+          <span class="label">Best Score</span>
+          <span class="value" id="menu-best-score">0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- How to Play Screen -->
+    <div id="screen-howto" class="screen">
+      <div class="panel-container">
+        <h2 class="panel-title">How to Play</h2>
+
+        <div class="howto-content">
+          <div class="howto-section">
+            <h3>🎯 Objective</h3>
+            <p>
+              Ascend through 8 tiers of the Spire. Each tier presents 3 floor
+              challenges. Choose wisely—higher risk means higher rewards!
+            </p>
+          </div>
+
+          <div class="howto-section">
+            <h3>🎮 Controls</h3>
+            <p>
+              <strong>Arrow Keys / WASD</strong> — Move your ship<br />
+              <strong>Space</strong> — Activate ability (some floors)<br />
+              <strong>Escape</strong> — Pause game
+            </p>
+          </div>
+
+          <div class="howto-section">
+            <h3>⚡ Floor Types</h3>
+            <ul>
+              <li>
+                <strong>Laser Lattice</strong> — Navigate timed laser patterns
+              </li>
+              <li>
+                <strong>Pulse Gates</strong> — Time movement through barriers
+              </li>
+              <li><strong>Drift Drones</strong> — Avoid roaming obstacles</li>
+              <li>
+                <strong>Gravity Shift</strong> — Adapt to changing momentum
+              </li>
+              <li><strong>Arc Mines</strong> — Evade proximity triggers</li>
+              <li>
+                <strong>Data Stream</strong> — Collect while avoiding corruption
+              </li>
+              <li><strong>Shield Matrix</strong> — Destroy barriers quickly</li>
+              <li>
+                <strong>Void Walker</strong> — Platform on disappearing tiles
+              </li>
+            </ul>
+          </div>
+
+          <div class="howto-section">
+            <h3>💎 Scoring</h3>
+            <p>
+              Base points + Time bonus + Risk multiplier = Floor score<br />
+              Complete all 8 tiers for maximum score!
+            </p>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" id="btn-howto-back">
+          Back to Menu
+        </button>
+      </div>
+    </div>
+
+    <!-- Settings Screen -->
+    <div id="screen-settings" class="screen">
+      <div class="panel-container">
+        <h2 class="panel-title">Settings</h2>
+
+        <div class="settings-list">
+          <div class="setting-item">
+            <span class="setting-label">Reduce Motion</span>
+            <label class="toggle">
+              <input type="checkbox" id="setting-reduce-motion" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <span class="setting-label">Sound Effects</span>
+            <label class="toggle">
+              <input type="checkbox" id="setting-sound" checked />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <span class="setting-label">Show FPS</span>
+            <label class="toggle">
+              <input type="checkbox" id="setting-fps" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="settings-actions">
+          <button class="btn btn-danger" id="btn-clear-data">
+            Clear Save Data
+          </button>
+          <button class="btn btn-primary" id="btn-settings-back">
+            Back to Menu
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tower Map / Choice Screen -->
+    <div id="screen-tower" class="screen">
+      <div class="tower-container">
+        <div class="tower-header">
+          <h2 class="tower-title">THE SPIRE</h2>
+          <div class="run-stats">
+            <div class="stat">
+              <span class="stat-label">Score</span>
+              <span class="stat-value" id="tower-score">0</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Multiplier</span>
+              <span class="stat-value" id="tower-multiplier">1.0x</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tower-map" id="tower-map">
+          <!-- Tiers generated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Floor Game Screen -->
+    <div id="screen-game" class="screen">
+      <div class="game-container">
+        <div class="game-hud">
+          <div class="hud-left">
+            <div class="hud-item">
+              <span class="hud-label">Tier</span>
+              <span class="hud-value" id="hud-tier">1</span>
+            </div>
+            <div class="hud-item">
+              <span class="hud-label">Floor</span>
+              <span class="hud-value" id="hud-floor">—</span>
+            </div>
+          </div>
+
+          <div class="hud-center">
+            <div class="timer-display">
+              <svg
+                class="timer-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12,6 12,12 16,14" />
+              </svg>
+              <span id="hud-timer">30.0</span>
+            </div>
+          </div>
+
+          <div class="hud-right">
+            <div class="hud-item">
+              <span class="hud-label">Score</span>
+              <span class="hud-value" id="hud-score">0</span>
+            </div>
+            <button class="btn-icon-only" id="btn-pause" aria-label="Pause">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="6" y="4" width="4" height="16" />
+                <rect x="14" y="4" width="4" height="16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <canvas id="game-canvas"></canvas>
+
+        <div class="floor-intro" id="floor-intro">
+          <h2 class="floor-name" id="intro-floor-name">Laser Lattice</h2>
+          <p class="floor-desc" id="intro-floor-desc">
+            Navigate through the laser grid
+          </p>
+          <div class="floor-countdown" id="intro-countdown">3</div>
+        </div>
+
+        <div class="fps-counter" id="fps-counter">60 FPS</div>
+      </div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div id="overlay-pause" class="overlay">
+      <div class="overlay-panel">
+        <h2 class="panel-title">Paused</h2>
+
+        <div class="pause-settings">
+          <div class="setting-item">
+            <span class="setting-label">Reduce Motion</span>
+            <label class="toggle">
+              <input type="checkbox" id="pause-reduce-motion" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="pause-buttons">
+          <button class="btn btn-primary" id="btn-resume">Resume</button>
+          <button class="btn btn-secondary" id="btn-restart-run">
+            Restart Run
+          </button>
+          <button class="btn btn-danger" id="btn-quit-run">Quit to Menu</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floor Result Screen -->
+    <div id="screen-result" class="screen">
+      <div class="result-container">
+        <div class="result-header">
+          <h2 class="result-title" id="result-title">Floor Complete!</h2>
+          <div class="result-status" id="result-status">✓</div>
+        </div>
+
+        <div class="result-breakdown">
+          <div class="breakdown-item">
+            <span class="breakdown-label">Base Score</span>
+            <span class="breakdown-value" id="result-base">0</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="breakdown-label">Time Bonus</span>
+            <span class="breakdown-value" id="result-time">+0</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="breakdown-label">Performance</span>
+            <span class="breakdown-value" id="result-performance">+0</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="breakdown-label">Risk Multiplier</span>
+            <span class="breakdown-value" id="result-multiplier">×1.0</span>
+          </div>
+          <div class="breakdown-total">
+            <span class="breakdown-label">Floor Total</span>
+            <span class="breakdown-value" id="result-total">0</span>
+          </div>
+        </div>
+
+        <div class="result-rewards" id="result-rewards">
+          <!-- Rewards shown here -->
+        </div>
+
+        <button class="btn btn-primary btn-large" id="btn-next-tier">
+          Continue to Tier <span id="next-tier-num">2</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Run Summary Screen -->
+    <div id="screen-summary" class="screen">
+      <div class="summary-container">
+        <h2 class="summary-title">RUN COMPLETE</h2>
+        <div class="summary-subtitle">You conquered the Spire!</div>
+
+        <div class="summary-score">
+          <div class="final-score">
+            <span class="label">Final Score</span>
+            <span class="value" id="summary-score">0</span>
+          </div>
+          <div class="best-comparison" id="summary-best">
+            <span class="new-best">🏆 NEW BEST!</span>
+          </div>
+        </div>
+
+        <div class="summary-stats">
+          <div class="summary-stat">
+            <span class="label">Floors Cleared</span>
+            <span class="value" id="summary-floors">8</span>
+          </div>
+          <div class="summary-stat">
+            <span class="label">Total Time</span>
+            <span class="value" id="summary-time">0:00</span>
+          </div>
+          <div class="summary-stat">
+            <span class="label">Highest Multiplier</span>
+            <span class="value" id="summary-multiplier">1.0x</span>
+          </div>
+        </div>
+
+        <div class="summary-buttons">
+          <button class="btn btn-primary btn-large" id="btn-new-run">
+            Start New Run
+          </button>
+          <button class="btn btn-secondary" id="btn-summary-menu">
+            Back to Menu
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Screen (failed run) -->
+    <div id="screen-gameover" class="screen">
+      <div class="summary-container gameover">
+        <h2 class="summary-title">RUN FAILED</h2>
+        <div class="summary-subtitle">The Spire claims another...</div>
+
+        <div class="summary-score">
+          <div class="final-score">
+            <span class="label">Final Score</span>
+            <span class="value" id="gameover-score">0</span>
+          </div>
+        </div>
+
+        <div class="summary-stats">
+          <div class="summary-stat">
+            <span class="label">Reached Tier</span>
+            <span class="value" id="gameover-tier">1</span>
+          </div>
+          <div class="summary-stat">
+            <span class="label">Floors Cleared</span>
+            <span class="value" id="gameover-floors">0</span>
+          </div>
+        </div>
+
+        <div class="summary-buttons">
+          <button class="btn btn-primary btn-large" id="btn-retry">
+            Try Again
+          </button>
+          <button class="btn btn-secondary" id="btn-gameover-menu">
+            Back to Menu
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
