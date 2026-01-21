@@ -174,7 +174,7 @@ function spin() {
   const resultIndex = Math.floor(Math.random() * WHEEL_NUMBERS.length);
   const resultNumber = WHEEL_NUMBERS[resultIndex];
 
-  // Calculate rotation
+  // Calculate wheel rotation
   const degreesPerSlot = 360 / WHEEL_NUMBERS.length;
   const targetDegree = resultIndex * degreesPerSlot;
   const spins = 5 + Math.floor(Math.random() * 3); // 5-7 full spins
@@ -182,13 +182,23 @@ function spin() {
 
   state.wheelRotation += totalRotation;
 
+  // Ball spins in opposite direction, faster at first then slows
+  const ballSpins = 8 + Math.floor(Math.random() * 4); // 8-11 spins (faster than wheel)
+  const ballRotation = -(ballSpins * 360); // Negative = opposite direction
+  state.ballRotation += ballRotation;
+
   // Show ball
   elements.ball.classList.add("visible");
 
-  // Animate wheel
+  // Animate wheel (clockwise)
   elements.wheel.style.transition =
     "transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)";
   elements.wheel.style.transform = `rotate(${state.wheelRotation}deg)`;
+
+  // Animate ball track (counter-clockwise)
+  elements.ballTrack.style.transition =
+    "transform 3.5s cubic-bezier(0.17, 0.67, 0.05, 0.95)";
+  elements.ballTrack.style.transform = `rotate(${state.ballRotation}deg)`;
 
   // After spin completes
   setTimeout(() => {
@@ -351,9 +361,9 @@ function init() {
   document.getElementById("btn-back").addEventListener("click", () => {
     window.location.href = "index.html";
   });
-  document
-    .getElementById("btn-to-menu")
-    .addEventListener("click", () => showScreen("menu"));
+  document.getElementById("btn-casino-back").addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
 
   // Game buttons
   elements.btnSpin.addEventListener("click", spin);

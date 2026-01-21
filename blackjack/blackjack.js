@@ -574,6 +574,13 @@ const BlackjackApp = (function () {
         this.quitToMenu();
       });
 
+      // Casino back button
+      document
+        .getElementById("btn-casino-back")
+        .addEventListener("click", () => {
+          window.location.href = "index.html";
+        });
+
       // Keyboard controls
       document.addEventListener("keydown", (e) => this.handleKeyDown(e));
     },
