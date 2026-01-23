@@ -60,47 +60,81 @@
       .bg-animation {
         position: fixed;
         inset: 0;
-        background: 
-          radial-gradient(ellipse at 20% 80%, rgba(107, 76, 255, 0.15) 0%, transparent 50%),
-          radial-gradient(ellipse at 80% 20%, rgba(51, 175, 255, 0.1) 0%, transparent 50%),
-          radial-gradient(ellipse at 50% 50%, rgba(255, 215, 0, 0.05) 0%, transparent 60%);
+        background:
+          radial-gradient(
+            ellipse at 20% 80%,
+            rgba(107, 76, 255, 0.15) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 80% 20%,
+            rgba(51, 175, 255, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 50% 50%,
+            rgba(255, 215, 0, 0.05) 0%,
+            transparent 60%
+          );
         animation: bgPulse 8s ease-in-out infinite;
       }
 
       @keyframes bgPulse {
-        0%, 100% { opacity: 0.8; }
-        50% { opacity: 1; }
+        0%,
+        100% {
+          opacity: 0.8;
+        }
+        50% {
+          opacity: 1;
+        }
       }
 
       /* Stars */
       .stars {
         position: fixed;
         inset: 0;
-        background-image: 
+        background-image:
           radial-gradient(2px 2px at 20px 30px, white, transparent),
-          radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+          radial-gradient(
+            2px 2px at 40px 70px,
+            rgba(255, 255, 255, 0.8),
+            transparent
+          ),
           radial-gradient(1px 1px at 90px 40px, white, transparent),
-          radial-gradient(2px 2px at 130px 80px, rgba(255,255,255,0.6), transparent),
+          radial-gradient(
+            2px 2px at 130px 80px,
+            rgba(255, 255, 255, 0.6),
+            transparent
+          ),
           radial-gradient(1px 1px at 160px 120px, white, transparent);
         background-size: 200px 200px;
         animation: twinkle 4s ease-in-out infinite;
       }
 
       @keyframes twinkle {
-        0%, 100% { opacity: 0.5; }
-        50% { opacity: 1; }
+        0%,
+        100% {
+          opacity: 0.5;
+        }
+        50% {
+          opacity: 1;
+        }
       }
 
       /* Main container */
       .verify-container {
         position: relative;
         z-index: 10;
-        background: linear-gradient(145deg, rgba(17, 24, 39, 0.95), rgba(10, 15, 26, 0.98));
+        background: linear-gradient(
+          145deg,
+          rgba(17, 24, 39, 0.95),
+          rgba(10, 15, 26, 0.98)
+        );
         border: 2px solid var(--gold);
         border-radius: 20px;
         padding: 3rem 4rem;
         text-align: center;
-        box-shadow: 
+        box-shadow:
           0 0 60px rgba(255, 215, 0, 0.2),
           0 0 100px rgba(107, 76, 255, 0.1),
           inset 0 0 60px rgba(0, 0, 0, 0.3);
@@ -109,8 +143,19 @@
       }
 
       @keyframes containerGlow {
-        0%, 100% { box-shadow: 0 0 60px rgba(255, 215, 0, 0.2), 0 0 100px rgba(107, 76, 255, 0.1), inset 0 0 60px rgba(0, 0, 0, 0.3); }
-        50% { box-shadow: 0 0 80px rgba(255, 215, 0, 0.3), 0 0 120px rgba(107, 76, 255, 0.15), inset 0 0 60px rgba(0, 0, 0, 0.3); }
+        0%,
+        100% {
+          box-shadow:
+            0 0 60px rgba(255, 215, 0, 0.2),
+            0 0 100px rgba(107, 76, 255, 0.1),
+            inset 0 0 60px rgba(0, 0, 0, 0.3);
+        }
+        50% {
+          box-shadow:
+            0 0 80px rgba(255, 215, 0, 0.3),
+            0 0 120px rgba(107, 76, 255, 0.15),
+            inset 0 0 60px rgba(0, 0, 0, 0.3);
+        }
       }
 
       /* Casino icon */
@@ -121,8 +166,13 @@
       }
 
       @keyframes bounce {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
       }
 
       /* Title */
@@ -202,13 +252,18 @@
       }
 
       .btn::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
         transition: left 0.5s ease;
       }
 
@@ -288,7 +343,7 @@
       <div class="warning-box">
         <div class="warning-icon">⚠️</div>
         <p class="warning-text">
-          Het Space Casino is alleen toegankelijk voor passagiers van 
+          Het Space Casino is alleen toegankelijk voor passagiers van
           <span class="age-highlight">18 jaar of ouder</span>.
         </p>
       </div>
@@ -299,9 +354,7 @@
         <button class="btn btn-yes" onclick="enterCasino()">
           ✓ Ja, ik ben 18+
         </button>
-        <button class="btn btn-no" onclick="exitCasino()">
-          ✗ Nee
-        </button>
+        <button class="btn btn-no" onclick="exitCasino()">✗ Nee</button>
       </div>
 
       <p class="footer-note">
@@ -312,12 +365,12 @@
     <script>
       function enterCasino() {
         // Store verification in session
-        sessionStorage.setItem('casinoAgeVerified', 'true');
-        window.location.href = 'index.html';
+        sessionStorage.setItem("casinoAgeVerified", "true");
+        window.location.href = "index.html";
       }
 
       function exitCasino() {
-        window.location.href = '../index.html';
+        window.location.href = "../index.html";
       }
     </script>
   </body>
