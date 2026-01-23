@@ -355,8 +355,8 @@ body {
 
 .wheel-container {
   position: relative;
-  width: 220px;
-  height: 220px;
+  width: 320px;
+  height: 320px;
 }
 
 .wheel {
@@ -402,11 +402,40 @@ body {
     #dc2626 340.54deg 350.27deg,
     #1a1a2e 350.27deg 360deg
   );
-  border: 8px solid var(--gold);
+  border: 10px solid var(--gold);
   box-shadow:
-    0 0 40px rgba(255, 215, 0, 0.3),
-    inset 0 0 40px rgba(0, 0, 0, 0.5);
+    0 0 50px rgba(255, 215, 0, 0.4),
+    inset 0 0 50px rgba(0, 0, 0, 0.5);
   transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+  position: relative;
+}
+
+.wheel-numbers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.wheel-number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  transform-origin: center center;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -12px;
+  margin-top: -12px;
 }
 
 .wheel-inner {
@@ -414,22 +443,22 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 60px;
-  height: 60px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   background: linear-gradient(145deg, #2a2a3e, #1a1a2e);
-  border: 4px solid var(--gold);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  border: 5px solid var(--gold);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
 }
 
 .wheel-marker {
   position: absolute;
-  top: -15px;
+  top: -20px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: var(--gold);
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
   z-index: 10;
 }
 
@@ -446,16 +475,16 @@ body {
 
 .ball {
   position: absolute;
-  top: 8px;
+  top: 12px;
   left: 50%;
   transform: translateX(-50%);
-  width: 14px;
-  height: 14px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: linear-gradient(145deg, #fff, #ccc);
   box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.5),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+    0 3px 6px rgba(0, 0, 0, 0.5),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.2);
   opacity: 0;
   transition: opacity 0.3s;
 }
@@ -472,11 +501,11 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 2rem;
-  background: rgba(0, 0, 0, 0.6);
-  border: 2px solid var(--gold);
-  border-radius: 12px;
+  gap: 0.75rem;
+  padding: 1.25rem 2.5rem;
+  background: rgba(0, 0, 0, 0.7);
+  border: 3px solid var(--gold);
+  border-radius: 16px;
   animation: pulse 0.5s ease;
 }
 
@@ -486,11 +515,11 @@ body {
 
 .result-number {
   font-family: "Orbitron", sans-serif;
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 700;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  min-width: 80px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  min-width: 100px;
   text-align: center;
 }
 
@@ -512,7 +541,7 @@ body {
 
 .result-text {
   font-family: "Orbitron", sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: var(--gold);
 }
 
@@ -540,14 +569,14 @@ body {
 
 .betting-table {
   width: 100%;
-  max-width: 700px;
+  max-width: 900px;
   background: var(--bg-table);
-  border: 4px solid var(--gold);
-  border-radius: 16px;
-  padding: 1rem;
+  border: 5px solid var(--gold);
+  border-radius: 20px;
+  padding: 1.5rem;
   box-shadow:
-    0 0 40px rgba(255, 215, 0, 0.2),
-    inset 0 0 60px rgba(0, 0, 0, 0.3);
+    0 0 50px rgba(255, 215, 0, 0.25),
+    inset 0 0 80px rgba(0, 0, 0, 0.3);
 }
 
 .bet-info {
@@ -589,12 +618,12 @@ body {
 }
 
 .chip-select {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   border: 3px solid #444;
   font-family: "Orbitron", sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
@@ -638,28 +667,28 @@ body {
   color: white;
   font-family: "Orbitron", sans-serif;
   font-weight: 700;
-  font-size: 1.2rem;
-  padding: 0.75rem;
+  font-size: 1.5rem;
+  padding: 1rem;
   text-align: center;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 
 .numbers-main {
   display: grid;
   grid-template-columns: repeat(13, 1fr);
-  gap: 2px;
+  gap: 3px;
 }
 
 .bet-cell {
-  padding: 0.6rem 0.3rem;
+  padding: 0.9rem 0.4rem;
   text-align: center;
   font-family: "Orbitron", sans-serif;
   font-weight: 600;
-  font-size: 0.85rem;
-  border-radius: 4px;
+  font-size: 1.1rem;
+  border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s;
   position: relative;
@@ -699,48 +728,49 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 20px;
-  height: 20px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   background: var(--gold);
   color: var(--bg-dark);
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 /* Dozen Row */
 .dozen-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  margin-top: 2px;
+  gap: 3px;
+  margin-top: 3px;
 }
 
 .dozen-bet {
   background: rgba(255, 215, 0, 0.15);
   color: var(--gold);
   border: 1px solid rgba(255, 215, 0, 0.3);
-  padding: 0.5rem;
+  padding: 0.7rem;
+  font-size: 1rem;
 }
 
 /* Outside Row */
 .outside-row {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 2px;
-  margin-top: 2px;
+  gap: 3px;
+  margin-top: 3px;
 }
 
 .outside-bet {
   background: rgba(255, 215, 0, 0.1);
   color: var(--gold);
   border: 1px solid rgba(255, 215, 0, 0.25);
-  padding: 0.6rem;
-  font-size: 0.75rem;
+  padding: 0.8rem;
+  font-size: 0.95rem;
 }
 
 .red-bet {

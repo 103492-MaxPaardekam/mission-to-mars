@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leeftijdsverificatie - Space Casino</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-dark: #0a0f1a;
+        --bg-card: #111827;
+        --primary: #33afff;
+        --secondary: #6b4cff;
+        --gold: #ffd700;
+        --gold-dark: #b8960b;
+        --success: #10b981;
+        --danger: #ef4444;
+        --text: #f2f2f2;
+        --text-dim: #9ca3af;
+        --glow: rgba(51, 175, 255, 0.4);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Roboto", sans-serif;
+        background: var(--bg-dark);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      /* Scanlines */
+      .scanlines {
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.02) 0,
+          rgba(255, 255, 255, 0.02) 1px,
+          transparent 2px,
+          transparent 4px
+        );
+        z-index: 1000;
+      }
+
+      /* Animated background */
+      .bg-animation {
+        position: fixed;
+        inset: 0;
+        background: 
+          radial-gradient(ellipse at 20% 80%, rgba(107, 76, 255, 0.15) 0%, transparent 50%),
+          radial-gradient(ellipse at 80% 20%, rgba(51, 175, 255, 0.1) 0%, transparent 50%),
+          radial-gradient(ellipse at 50% 50%, rgba(255, 215, 0, 0.05) 0%, transparent 60%);
+        animation: bgPulse 8s ease-in-out infinite;
+      }
+
+      @keyframes bgPulse {
+        0%, 100% { opacity: 0.8; }
+        50% { opacity: 1; }
+      }
+
+      /* Stars */
+      .stars {
+        position: fixed;
+        inset: 0;
+        background-image: 
+          radial-gradient(2px 2px at 20px 30px, white, transparent),
+          radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+          radial-gradient(1px 1px at 90px 40px, white, transparent),
+          radial-gradient(2px 2px at 130px 80px, rgba(255,255,255,0.6), transparent),
+          radial-gradient(1px 1px at 160px 120px, white, transparent);
+        background-size: 200px 200px;
+        animation: twinkle 4s ease-in-out infinite;
+      }
+
+      @keyframes twinkle {
+        0%, 100% { opacity: 0.5; }
+        50% { opacity: 1; }
+      }
+
+      /* Main container */
+      .verify-container {
+        position: relative;
+        z-index: 10;
+        background: linear-gradient(145deg, rgba(17, 24, 39, 0.95), rgba(10, 15, 26, 0.98));
+        border: 2px solid var(--gold);
+        border-radius: 20px;
+        padding: 3rem 4rem;
+        text-align: center;
+        box-shadow: 
+          0 0 60px rgba(255, 215, 0, 0.2),
+          0 0 100px rgba(107, 76, 255, 0.1),
+          inset 0 0 60px rgba(0, 0, 0, 0.3);
+        max-width: 500px;
+        animation: containerGlow 3s ease-in-out infinite;
+      }
+
+      @keyframes containerGlow {
+        0%, 100% { box-shadow: 0 0 60px rgba(255, 215, 0, 0.2), 0 0 100px rgba(107, 76, 255, 0.1), inset 0 0 60px rgba(0, 0, 0, 0.3); }
+        50% { box-shadow: 0 0 80px rgba(255, 215, 0, 0.3), 0 0 120px rgba(107, 76, 255, 0.15), inset 0 0 60px rgba(0, 0, 0, 0.3); }
+      }
+
+      /* Casino icon */
+      .casino-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        animation: bounce 2s ease-in-out infinite;
+      }
+
+      @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+
+      /* Title */
+      .title {
+        font-family: "Orbitron", sans-serif;
+        font-size: 2rem;
+        color: var(--gold);
+        text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        margin-bottom: 0.5rem;
+        letter-spacing: 3px;
+      }
+
+      .subtitle {
+        font-family: "Orbitron", sans-serif;
+        font-size: 1rem;
+        color: var(--primary);
+        text-shadow: 0 0 20px var(--glow);
+        margin-bottom: 2rem;
+        letter-spacing: 2px;
+      }
+
+      /* Warning box */
+      .warning-box {
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        border-radius: 10px;
+        padding: 1.25rem;
+        margin-bottom: 2rem;
+      }
+
+      .warning-icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .warning-text {
+        font-size: 1.1rem;
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      .age-highlight {
+        font-family: "Orbitron", sans-serif;
+        font-size: 1.3rem;
+        color: var(--gold);
+        font-weight: 700;
+      }
+
+      /* Question */
+      .question {
+        font-family: "Orbitron", sans-serif;
+        font-size: 1.2rem;
+        color: var(--text);
+        margin-bottom: 2rem;
+        letter-spacing: 1px;
+      }
+
+      /* Buttons */
+      .button-group {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+      }
+
+      .btn {
+        font-family: "Orbitron", sans-serif;
+        font-size: 1.1rem;
+        padding: 1rem 2.5rem;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 600;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: left 0.5s ease;
+      }
+
+      .btn:hover::before {
+        left: 100%;
+      }
+
+      .btn-yes {
+        background: linear-gradient(135deg, var(--success), #059669);
+        border: 2px solid var(--success);
+        color: white;
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+      }
+
+      .btn-yes:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 0 40px rgba(16, 185, 129, 0.6);
+      }
+
+      .btn-no {
+        background: linear-gradient(135deg, var(--danger), #b91c1c);
+        border: 2px solid var(--danger);
+        color: white;
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+      }
+
+      .btn-no:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 0 40px rgba(239, 68, 68, 0.6);
+      }
+
+      /* Footer note */
+      .footer-note {
+        margin-top: 2rem;
+        font-size: 0.85rem;
+        color: var(--text-dim);
+        line-height: 1.5;
+      }
+
+      /* Responsive */
+      @media (max-width: 600px) {
+        .verify-container {
+          margin: 1rem;
+          padding: 2rem 1.5rem;
+        }
+
+        .title {
+          font-size: 1.5rem;
+        }
+
+        .subtitle {
+          font-size: 0.9rem;
+        }
+
+        .button-group {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .btn {
+          width: 100%;
+          padding: 1rem 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scanlines"></div>
+    <div class="bg-animation"></div>
+    <div class="stars"></div>
+
+    <div class="verify-container">
+      <div class="casino-icon">🎰</div>
+      <h1 class="title">SPACE CASINO</h1>
+      <p class="subtitle">LEEFTIJDSVERIFICATIE</p>
+
+      <div class="warning-box">
+        <div class="warning-icon">⚠️</div>
+        <p class="warning-text">
+          Het Space Casino is alleen toegankelijk voor passagiers van 
+          <span class="age-highlight">18 jaar of ouder</span>.
+        </p>
+      </div>
+
+      <p class="question">Ben je 18 jaar of ouder?</p>
+
+      <div class="button-group">
+        <button class="btn btn-yes" onclick="enterCasino()">
+          ✓ Ja, ik ben 18+
+        </button>
+        <button class="btn btn-no" onclick="exitCasino()">
+          ✗ Nee
+        </button>
+      </div>
+
+      <p class="footer-note">
+        🎲 Speel verantwoord. Gokken kan verslavend zijn.
+      </p>
+    </div>
+
+    <script>
+      function enterCasino() {
+        // Store verification in session
+        sessionStorage.setItem('casinoAgeVerified', 'true');
+        window.location.href = 'index.html';
+      }
+
+      function exitCasino() {
+        window.location.href = '../index.html';
+      }
+    </script>
+  </body>
+</html>

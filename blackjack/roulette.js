@@ -39,6 +39,7 @@ const elements = {
   headerBalance: document.getElementById("header-balance"),
   totalBet: document.getElementById("total-bet"),
   wheel: document.getElementById("wheel"),
+  wheelNumbers: document.getElementById("wheel-numbers"),
   ballTrack: document.getElementById("ball-track"),
   ball: document.getElementById("ball"),
   resultDisplay: document.getElementById("result-display"),
@@ -47,6 +48,28 @@ const elements = {
   btnSpin: document.getElementById("btn-spin"),
   btnClear: document.getElementById("btn-clear"),
 };
+
+// Generate wheel numbers
+function generateWheelNumbers() {
+  const wheelRadius = 130; // Distance from center for numbers
+  const totalSlots = WHEEL_NUMBERS.length;
+  const degreesPerSlot = 360 / totalSlots;
+
+  WHEEL_NUMBERS.forEach((num, index) => {
+    const angle = index * degreesPerSlot - 90; // Start from top
+    const radian = (angle * Math.PI) / 180;
+
+    const x = Math.cos(radian) * wheelRadius;
+    const y = Math.sin(radian) * wheelRadius;
+
+    const numEl = document.createElement("span");
+    numEl.className = "wheel-number";
+    numEl.textContent = num;
+    numEl.style.transform = `translate(${x}px, ${y}px) rotate(${angle + 90}deg)`;
+
+    elements.wheelNumbers.appendChild(numEl);
+  });
+}
 
 // Screen Navigation
 function showScreen(screenName) {
@@ -347,6 +370,7 @@ function init() {
   updateBalanceDisplays();
   initChipSelector();
   initBettingTable();
+  generateWheelNumbers();
 
   // Menu buttons
   document
