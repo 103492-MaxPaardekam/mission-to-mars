@@ -120,6 +120,12 @@ body {
   text-shadow: 0 0 10px #33afff;
 }
 
+.header-buttons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
 .boot-button {
   padding: 10px 26px;
   font-family: "Orbitron";
@@ -139,6 +145,177 @@ body {
   background: #33afff;
   color: #05070d;
   transform: translateY(-2px);
+}
+
+/* Emergency Button */
+.emergency-button {
+  padding: 10px 26px;
+  font-family: "Orbitron";
+  border: 2px solid #ff3333;
+  background: rgba(255, 0, 0, 0.2);
+  color: #ff3333;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.25s;
+  box-shadow:
+    0 0 8px #ff3333 inset,
+    0 0 12px #ff3333;
+  backdrop-filter: blur(5px);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.emergency-button:hover {
+  background: #ff3333;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 15px #ff3333 inset,
+    0 0 25px #ff3333;
+}
+
+.emergency-button.active {
+  background: #ff3333;
+  color: #fff;
+  animation: emergencyPulse 0.5s infinite;
+}
+
+@keyframes emergencyPulse {
+  0%, 100% { box-shadow: 0 0 15px #ff3333 inset, 0 0 25px #ff3333; }
+  50% { box-shadow: 0 0 30px #ff3333 inset, 0 0 50px #ff3333; }
+}
+
+/* Emergency Overlay */
+.emergency-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  animation: flashRed 0.5s infinite;
+}
+
+.emergency-overlay.active {
+  display: flex;
+}
+
+@keyframes flashRed {
+  0%, 100% { background: rgba(0, 0, 0, 0.9); }
+  50% { background: rgba(139, 0, 0, 0.9); }
+}
+
+.locked-content {
+  text-align: center;
+  color: #ff3333;
+  animation: lockShake 0.1s infinite;
+}
+
+@keyframes lockShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+.lock-icon {
+  font-size: 120px;
+  margin-bottom: 20px;
+  animation: lockPulse 1s infinite;
+}
+
+@keyframes lockPulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px #ff3333); }
+  50% { transform: scale(1.1); filter: drop-shadow(0 0 40px #ff0000); }
+}
+
+.locked-content h2 {
+  font-family: "Orbitron", sans-serif;
+  font-size: 48px;
+  margin: 0 0 15px 0;
+  text-shadow: 0 0 20px #ff3333;
+  letter-spacing: 5px;
+}
+
+.locked-content p {
+  font-size: 20px;
+  margin: 10px 0;
+  opacity: 0.8;
+}
+
+.locked-content .blink-text {
+  animation: blinkText 0.5s infinite;
+}
+
+@keyframes blinkText {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Emergency Mode Body Effect */
+body.emergency-mode {
+  animation: bodyFlash 0.5s infinite;
+}
+
+@keyframes bodyFlash {
+  0%, 100% { background: #0a0f1a; }
+  50% { background: #2a0a0a; }
+}
+
+body.emergency-mode .module-card {
+  pointer-events: none;
+  border-color: #ff3333 !important;
+  box-shadow: 0 0 40px rgba(255, 0, 0, 0.4) !important;
+  position: relative;
+}
+
+body.emergency-mode .module-card::after {
+  content: "🔒 LOCKED";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Orbitron", sans-serif;
+  font-size: 24px;
+  color: #ff3333;
+  border-radius: 18px;
+  text-shadow: 0 0 15px #ff3333;
+}
+
+body.emergency-mode .side-panel {
+  border-color: #ff3333 !important;
+  box-shadow: 0 0 40px rgba(255, 0, 0, 0.4) !important;
+}
+
+body.emergency-mode .side-panel h2 {
+  color: #ff3333 !important;
+  text-shadow: 0 0 10px #ff3333 !important;
+}
+
+body.emergency-mode .side-panel li::before {
+  background: #ff3333 !important;
+  box-shadow: 0 0 8px #ff3333 !important;
+}
+
+body.emergency-mode .logo {
+  color: #ff3333 !important;
+  text-shadow: 0 0 20px #ff3333 !important;
+  animation: logoFlash 0.3s infinite;
+}
+
+@keyframes logoFlash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+body.emergency-mode .boot-button {
+  pointer-events: none;
+  border-color: #ff3333 !important;
+  color: #ff3333 !important;
+  box-shadow: 0 0 8px #ff3333 inset, 0 0 12px #ff3333 !important;
+  opacity: 0.5;
 }
 
 .dashboard {

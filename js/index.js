@@ -1,3 +1,42 @@
+// Emergency System
+let emergencyActive = false;
+
+function toggleEmergency() {
+  emergencyActive = !emergencyActive;
+  const body = document.body;
+  const overlay = document.getElementById('emergencyOverlay');
+  const btn = document.getElementById('emergencyBtn');
+  
+  if (emergencyActive) {
+    body.classList.add('emergency-mode');
+    overlay.classList.add('active');
+    btn.classList.add('active');
+    btn.innerHTML = '🚨 DEACTIVATE';
+    
+    // Play alert sound effect (visual only if no audio)
+    console.log('🚨 EMERGENCY PROTOCOL ACTIVATED');
+  } else {
+    body.classList.remove('emergency-mode');
+    overlay.classList.remove('active');
+    btn.classList.remove('active');
+    btn.innerHTML = '🚨 EMERGENCY';
+    
+    console.log('✅ Emergency protocol deactivated');
+  }
+}
+
+// Allow clicking overlay to deactivate emergency
+document.addEventListener('DOMContentLoaded', () => {
+  const overlay = document.getElementById('emergencyOverlay');
+  if (overlay) {
+    overlay.addEventListener('click', () => {
+      if (emergencyActive) {
+        toggleEmergency();
+      }
+    });
+  }
+});
+
 // Jumpscare System - 10% chance on click
 const JumpscareSystem = {
   chance: 0.1, // 10% chance

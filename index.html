@@ -19,10 +19,25 @@
     <header class="header">
       <h1 class="logo">MISSION TO MARS</h1>
 
-      <button onclick="window.location.href = 'boot.html'" class="boot-button">
-        Reboot System
-      </button>
+      <div class="header-buttons">
+        <button onclick="toggleEmergency()" class="emergency-button" id="emergencyBtn">
+          🚨 EMERGENCY
+        </button>
+        <button onclick="window.location.href = 'boot.html'" class="boot-button">
+          Reboot System
+        </button>
+      </div>
     </header>
+
+    <!-- Emergency Locked Overlay -->
+    <div id="emergencyOverlay" class="emergency-overlay">
+      <div class="locked-content">
+        <div class="lock-icon">🔒</div>
+        <h2>SYSTEM LOCKED</h2>
+        <p>Emergency Protocol Active</p>
+        <p class="blink-text">All systems secured</p>
+      </div>
+    </div>
 
     <main class="dashboard">
       <section class="modules">
